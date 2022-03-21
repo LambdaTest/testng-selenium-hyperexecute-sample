@@ -5,30 +5,29 @@ testSuiteTimeout: 150
 testSuiteStep: 150
 
 runson: mac
-
 retryOnFailure: true
+
 maxRetries: 5
 concurrency: 4
 
 env:
   # PAT: ${{ .secrets.testKey }}
   CACHE_DIR: ~/m2_cache_dir
-  
+
 # Dependency caching for Windows
 cacheKey: '{{ checksum "pom.xml" }}'
 cacheDirectories:
   - $CACHE_DIR
 
 matrix:
-  files: ["Test1","Test2","Test3", "Test4"]
-
+  tests: ["Test1", "Test2", "Test3", "Test4" ]
 
 shell: bash
 
 pre:
   # Create the Cache directory
   - mkdir ~/m2_cache_dir
-  # Download and install packages in the CACHE_DIR. 
+  # Download and install packages in the CACHE_DIR.
   # Skip execution of the tests in the pre step
   - mvn -Dmaven.repo.local=$CACHE_DIR -Dmaven.test.skip=true clean install
 
@@ -43,4 +42,4 @@ uploadArtefacts:
     - target/surefire-reports/html/**
 
 testSuites:
-  - mvn test -Dmaven.repo.local=$CACHE_DIR -Dtest=$files
+  - mvn -Dmaven.repo.local=$CACHE_DIR -Dtest=$tests
