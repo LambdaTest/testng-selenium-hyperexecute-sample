@@ -31,7 +31,7 @@ pre:
   - mvn -Dmaven.repo.local=$CACHE_DIR -Dmaven.test.skip=true clean install
 
 post:
-  - cat yaml/testng_hypertest_autosplit_sample.yaml
+  - cat yaml/testng_hyperexecute_autosplit_sample.yaml
 
 mergeArtifacts: true
 
