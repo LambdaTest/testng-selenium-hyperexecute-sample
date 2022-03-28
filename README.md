@@ -20,14 +20,14 @@ To know more about how HyperExecute does intelligent Test Orchestration, do chec
    - [Core](#core)
    - [Pre Steps and Dependency Caching](#pre-steps-and-dependency-caching)
    - [Post Steps](#post-steps)
-   - [Artefacts Management](#artefacts-management)
+   - [Artifacts Management](#artifacts-management)
    - [Test Execution](#test-execution)
 
 * [Auto-Split Execution with TestNG](#auto-split-execution-with-testng)
    - [Core](#core-1)
    - [Pre Steps and Dependency Caching](#pre-steps-and-dependency-caching-1)
    - [Post Steps](#post-steps-1)
-   - [Artefacts Management](#artefacts-management-1)
+   - [Artifacts Management](#artifacts-management-1)
    - [Test Execution](#test-execution-1)
 
 * [Secrets Management](#secrets-management)
@@ -90,10 +90,10 @@ testSuiteStep: 150
 
 Global timeout, testSuite timeout, and testSuite timeout are set to 150 minutes.
  
-The target platform is set to Mac. Please set the *[runson]* key to *[win]* if the tests have to be executed on the macOS platform.
+The target platform is set to win. Please set the *[runson]* key to *[mac]* if the tests have to be executed on the macOS platform.
 
 ```yaml
-runson: mac
+runson: win
 ```
 
 The *matrix* constitutes of the following entries - *tests*. The entries represent the class names in the test code.
@@ -116,7 +116,7 @@ Dependency caching is enabled in the YAML file to ensure that the package depend
 
 ```yaml
 env:
-  CACHE_DIR: ~/m2_cache_dir
+  CACHE_DIR: m2_cache_dir
 
 # Dependency caching for Windows
 cacheKey: '{{ checksum "pom.xml" }}'
@@ -127,10 +127,8 @@ cacheDirectories:
 Steps (or commands) that must run before the test execution are listed in the *pre* run step. In the example, the Maven packages are downloaded in the *m2_cache_dir*. To prevent test execution at the *pre* stage, the *maven.test.skip* parameter is set to *true* so that only packages are downloaded and no test execution is performed.
 
 ```yaml
-shell: bash
-
 pre:
-  - mkdir ~/m2_cache_dir
+  - mkdir m2_cache_dir
   - mvn -Dmaven.repo.local=$CACHE_DIR -Dmaven.test.skip=true clean install
 ```
 
@@ -143,11 +141,11 @@ post:
   - cat yaml/testng_hyperexecute_matrix_sample.yaml
 ```
 
-### Artefacts Management
+### Artifacts Management
 
-The *mergeArtifacts* directive (which is by default *false*) is set to *true* for merging the artefacts and combing artefacts generated under each task.
+The *mergeArtifacts* directive (which is by default *false*) is set to *true* for merging the artifacts and combing artifacts generated under each task.
 
-The *uploadArtefacts* directive informs HyperExecute to upload artefacts [files, reports, etc.] generated after task completion. In the example, *path* consists of a regex for parsing the sure-fire (i.e. *target/surefire-reports/html*) directory that contains the HTML test reports.
+The *uploadArtefacts* directive informs HyperExecute to upload artifacts [files, reports, etc.] generated after task completion. In the example, *path* consists of a regex for parsing the sure-fire (i.e. *target/surefire-reports/html*) directory that contains the HTML test reports.
 
 ```yaml
 mergeArtifacts: true
@@ -158,17 +156,17 @@ uploadArtefacts:
     - target/surefire-reports/html/**
 ```
 
-HyperExecute also facilitates the provision to download the artefacts on your local machine. To download the artefacts, click on Artefacts button corresponding to the associated TestID.
+HyperExecute also facilitates the provision to download the artifacts on your local machine. To download the artifacts, click on Artifacts button corresponding to the associated TestID.
 
-<img width="1425" alt="testng_matrix_artefacts_1" src="https://user-images.githubusercontent.com/1688653/159757682-f1de6930-fc90-4795-a9bd-6081b6b79cd2.png">
+<img width="1425" alt="testng_matrix_artefacts_1" src="https://user-images.githubusercontent.com/1688653/160457830-2dd0789b-5f6d-4cb1-9826-910fcddf6986.png">
 
-Now, you can download the artefacts by clicking on the Download button as shown below:
+Now, you can download the artifacts by clicking on the Download button as shown below:
 
-<img width="1425" alt="testng_matrix_artefacts_2" src="https://user-images.githubusercontent.com/1688653/159757700-52ef3034-449f-4061-a19d-5557c631aed0.png">
+<img width="1425" alt="testng_matrix_artefacts_2" src="https://user-images.githubusercontent.com/1688653/160457848-17d10d05-6421-4ecc-b62e-977692768607.png">
 
 ## Test Execution
 
-The CLI option *--config* is used for providing the custom HyperExecute YAML file (i.e. *yaml/testng_hyperexecute_matrix_sample.yaml*). Run the following command on the terminal to trigger the tests in C# files on the HyperExecute grid. The *--download-artifacts* option is used to inform HyperExecute to download the artefacts for the job. The *--force-clean-artifacts* option force cleans any existing artifacts for the project.
+The CLI option *--config* is used for providing the custom HyperExecute YAML file (i.e. *yaml/testng_hyperexecute_matrix_sample.yaml*). Run the following command on the terminal to trigger the tests in C# files on the HyperExecute grid. The *--download-artifacts* option is used to inform HyperExecute to download the artifacts for the job. The *--force-clean-artifacts* option force cleans any existing artifacts for the project.
 
 ```bash
 ./concierge --config yaml/testng_hyperexecute_matrix_sample.yaml --force-clean-artifacts --download-artifacts
@@ -176,7 +174,7 @@ The CLI option *--config* is used for providing the custom HyperExecute YAML fil
 
 Visit [HyperExecute Automation Dashboard](https://automation.lambdatest.com/hypertest) to check the status of execution:
 
-<img width="1414" alt="testng_matrix_execution" src="https://user-images.githubusercontent.com/1688653/159757682-f1de6930-fc90-4795-a9bd-6081b6b79cd2.png">
+<img width="1414" alt="testng_matrix_execution" src="https://user-images.githubusercontent.com/1688653/160457830-2dd0789b-5f6d-4cb1-9826-910fcddf6986.png">
 
 Shown below is the execution screenshot when the YAML file is triggered from the terminal:
 
@@ -205,7 +203,7 @@ Global timeout, testSuite timeout, and testSuite timeout are set to 150 minutes.
 The *runson* key determines the platform (or operating system) on which the tests are executed. Here we have set the target OS as Windows.
 
 ```yaml
-runson: mac
+runson: win
 ```
 
 Auto-split is set to true in the YAML file.
@@ -228,7 +226,7 @@ Dependency caching is enabled in the YAML file to ensure that the package depend
 
 ```yaml
 env:
-  CACHE_DIR: ~/m2_cache_dir
+  CACHE_DIR: m2_cache_dir
 
 # Dependency caching for Windows
 cacheKey: '{{ checksum "pom.xml" }}'
@@ -239,10 +237,8 @@ cacheDirectories:
 Steps (or commands) that must run before the test execution are listed in the *pre* run step. In the example, the Maven packages are downloaded in the *m2_cache_dir*. To prevent test execution at the *pre* stage, the *maven.test.skip* parameter is set to *true* so that only packages are downloaded and no test execution is performed.
 
 ```yaml
-shell: bash
-
 pre:
-  - mkdir ~/m2_cache_dir
+  - mkdir m2_cache_dir
   - mvn -Dmaven.repo.local=$CACHE_DIR -Dmaven.test.skip=true clean install
 ```
 
@@ -274,14 +270,14 @@ Running the above command on the terminal will give a list of scenarios present 
 The *testRunnerCommand* contains the command that is used for triggering the test. The output fetched from the *testDiscoverer* command acts as an input to the *testRunner* command.
 
 ```yaml
-testRunnerCommand: mvn -Dmaven.repo.local=$CACHE_DIR -Dtest=$test
+testRunnerCommand: mvn `-Dmaven.repo.local=$CACHE_DIR `-Dtest=$test
 ```
 
-### Artefacts Management
+### Artifacts Management
 
-The *mergeArtifacts* directive (which is by default *false*) is set to *true* for merging the artefacts and combing artefacts generated under each task.
+The *mergeArtifacts* directive (which is by default *false*) is set to *true* for merging the artifacts and combing artifacts generated under each task.
 
-The *uploadArtefacts* directive informs HyperExecute to upload artefacts [files, reports, etc.] generated after task completion. In the example, *path* consists of a regex for parsing the sure-fire (i.e. *target/surefire-reports/html*) directory that contains the HTML test reports.
+The *uploadArtefacts* directive informs HyperExecute to upload artifacts [files, reports, etc.] generated after task completion. In the example, *path* consists of a regex for parsing the sure-fire (i.e. *target/surefire-reports/html*) directory that contains the HTML test reports.
 
 ```yaml
 mergeArtifacts: true
@@ -292,17 +288,17 @@ uploadArtefacts:
     - target/surefire-reports/html/**
 ```
 
-HyperExecute also facilitates the provision to download the artefacts on your local machine. To download the artefacts, click on Artefacts button corresponding to the associated TestID.
+HyperExecute also facilitates the provision to download the artifacts on your local machine. To download the artifacts, click on Artifacts button corresponding to the associated TestID.
 
-<img width="1425" alt="testng_autosplit_artefacts_1" src="https://user-images.githubusercontent.com/1688653/159758825-fc3c63de-fbe9-42be-b33c-bbaca7c4a2b8.png">
+<img width="1425" alt="testng_autosplit_artifacts_1" src="https://user-images.githubusercontent.com/1688653/160457854-5730c0bd-9ce0-483d-b727-f10f148c1c11.png">
 
-Now, you can download the artefacts by clicking on the Download button as shown below:
+Now, you can download the artifacts by clicking on the Download button as shown below:
 
-<img width="1425" alt="testng_autosplit_artefacts_2" src="https://user-images.githubusercontent.com/1688653/159758841-5ee6a32d-16e4-4684-a4fe-c1def9c5e33f.png">
+<img width="1425" alt="testng_autosplit_artefacts_2" src="https://user-images.githubusercontent.com/1688653/160457858-be8f3e89-fe85-4f24-b8ad-5e9570321b3c.png">
 
 ### Test Execution
 
-The CLI option *--config* is used for providing the custom HyperExecute YAML file (i.e. *yaml/testng_hyperexecute_autosplit_sample.yaml*). Run the following command on the terminal to trigger the tests in C# files on the HyperExecute grid. The *--download-artifacts* option is used to inform HyperExecute to download the artefacts for the job. The *--force-clean-artifacts* option force cleans any existing artifacts for the project.
+The CLI option *--config* is used for providing the custom HyperExecute YAML file (i.e. *yaml/testng_hyperexecute_autosplit_sample.yaml*). Run the following command on the terminal to trigger the tests in C# files on the HyperExecute grid. The *--download-artifacts* option is used to inform HyperExecute to download the artifacts for the job. The *--force-clean-artifacts* option force cleans any existing artifacts for the project.
 
 ```bash
 ./concierge --config yaml/testng_hyperexecute_autosplit_sample.yaml --force-clean-artifacts --download-artifacts
@@ -310,7 +306,7 @@ The CLI option *--config* is used for providing the custom HyperExecute YAML fil
 
 Visit [HyperExecute Automation Dashboard](https://automation.lambdatest.com/hypertest) to check the status of execution
 
-<img width="1414" alt="testng_autosplit_execution" src="https://user-images.githubusercontent.com/1688653/159758825-fc3c63de-fbe9-42be-b33c-bbaca7c4a2b8.png">
+<img width="1414" alt="testng_autosplit_execution" src="https://user-images.githubusercontent.com/1688653/160457854-5730c0bd-9ce0-483d-b727-f10f148c1c11.png">
 
 Shown below is the execution screenshot when the YAML file is triggered from the terminal:
 
@@ -341,7 +337,7 @@ HyperExecute lets you navigate from/to *Test Logs* in Automation Dashboard from/
 
 Shown below is the HyperExecute Automation dashboard which also lists the tests that were executed as a part of the test suite:
 
-<img width="1429" alt="testng_hypertest_automation_dashboard" src="https://user-images.githubusercontent.com/1688653/159757682-f1de6930-fc90-4795-a9bd-6081b6b79cd2.png">
+<img width="1429" alt="testng_hypertest_automation_dashboard" src="https://user-images.githubusercontent.com/1688653/160457830-2dd0789b-5f6d-4cb1-9826-910fcddf6986.png">
 
 Here is a screenshot that lists the automation test that was executed on the HyperExecute grid:
 
