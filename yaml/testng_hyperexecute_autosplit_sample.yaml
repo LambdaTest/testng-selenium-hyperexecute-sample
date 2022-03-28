@@ -4,7 +4,7 @@ globalTimeout: 150
 testSuiteTimeout: 150
 testSuiteStep: 150
 
-runson: mac
+runson: win
 
 autosplit: true
 retryOnFailure: true
@@ -14,19 +14,17 @@ concurrency: 4
 
 env:
   # PAT: ${{ .secrets.testKey }}
-  CACHE_DIR: ~/m2_cache_dir
-  
+  CACHE_DIR: m2_cache_dir
+
 # Dependency caching for Windows
 cacheKey: '{{ checksum "pom.xml" }}'
 cacheDirectories:
   - $CACHE_DIR
 
-shell: bash
-
 pre:
   # Create the Cache directory
-  - mkdir ~/m2_cache_dir
-  # Download and install packages in the CACHE_DIR. 
+  - mkdir m2_cache_dir
+  # Download and install packages in the CACHE_DIR.
   # Skip execution of the tests in the pre step
   - mvn -Dmaven.repo.local=$CACHE_DIR -Dmaven.test.skip=true clean install
 
@@ -46,4 +44,4 @@ testDiscovery:
   command: grep 'class name' testng.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
 
 # testRunnerCommand: mvn test -Dtest=$test
-testRunnerCommand: mvn -Dmaven.repo.local=$CACHE_DIR -Dtest=$test
+testRunnerCommand: mvn `-Dmaven.repo.local=$CACHE_DIR `-Dtest=$test
