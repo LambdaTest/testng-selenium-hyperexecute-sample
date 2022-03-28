@@ -28,7 +28,7 @@ public class Test1
 
         capabilities.setCapability("build", "[HyperExecute - 1] Demonstration of the TestNG Framework");
         capabilities.setCapability("name", "[HyperExecute - 1] Demonstration of the TestNG Framework");
-        capabilities.setCapability("platform", "MacOS Catalina");
+        capabilities.setCapability("platform", "Windows 10");
         capabilities.setCapability("browserName", "Chrome");
         capabilities.setCapability("version","latest");
 
