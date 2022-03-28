@@ -4,7 +4,7 @@ globalTimeout: 150
 testSuiteTimeout: 150
 testSuiteStep: 150
 
-runson: mac
+runson: win
 retryOnFailure: true
 
 maxRetries: 5
@@ -12,7 +12,7 @@ concurrency: 4
 
 env:
   # PAT: ${{ .secrets.testKey }}
-  CACHE_DIR: ~/m2_cache_dir
+  CACHE_DIR: m2_cache_dir
 
 # Dependency caching for Windows
 cacheKey: '{{ checksum "pom.xml" }}'
@@ -42,4 +42,4 @@ uploadArtefacts:
     - target/surefire-reports/html/**
 
 testSuites:
-  - mvn -Dmaven.repo.local=$CACHE_DIR -Dtest=$tests
+  - mvn `-Dmaven.repo.local=$CACHE_DIR `-Dtest=$tests
