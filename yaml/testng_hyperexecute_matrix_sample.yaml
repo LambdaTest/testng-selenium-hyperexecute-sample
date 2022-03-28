@@ -22,11 +22,11 @@ cacheDirectories:
 matrix:
   tests: ["Test1", "Test2", "Test3", "Test4" ]
 
-shell: bash
+# shell: bash
 
 pre:
   # Create the Cache directory
-  - mkdir ~/m2_cache_dir
+  - mkdir m2_cache_dir
   # Download and install packages in the CACHE_DIR.
   # Skip execution of the tests in the pre step
   - mvn -Dmaven.repo.local=$CACHE_DIR -Dmaven.test.skip=true clean install
