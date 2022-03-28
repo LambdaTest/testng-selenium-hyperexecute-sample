@@ -24,7 +24,7 @@ public class Test4
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("build", "[HyperTest - 4] Demonstration of the TestNG Framework");
         capabilities.setCapability("name", "[HyperTest - 4] Demonstration of the TestNG Framework");
-        capabilities.setCapability("platform", "MacOS Catalina");
+        capabilities.setCapability("platform", "Windows 10");
         capabilities.setCapability("browserName", "Chrome");
         capabilities.setCapability("version", "latest-3");
 
