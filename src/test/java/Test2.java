@@ -30,7 +30,7 @@ public class Test2
         capabilities.setCapability("build", "[HyperTest - 2] Demonstration of the TestNG Framework");
         capabilities.setCapability("name", "[HyperTest - 2] Demonstration of the TestNG Framework");
 
-        capabilities.setCapability("platform", "MacOS Catalina");
+        capabilities.setCapability("platform", "Windows 11");
         capabilities.setCapability("browserName", "Firefox");
         capabilities.setCapability("version","latest");
 
