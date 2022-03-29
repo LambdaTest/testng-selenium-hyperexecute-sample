@@ -348,5 +348,3 @@ Here is a screenshot that lists the automation test that was executed on the Hyp
 * HyperExecute HomePage: https://www.lambdatest.com/support/docs/getting-started-with-hyperexecute/
 * Lambdatest HomePage: https://www.lambdatest.com
 
-## License
-Licensed under the [MIT license](LICENSE).
