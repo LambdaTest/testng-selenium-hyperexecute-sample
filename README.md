@@ -1,4 +1,4 @@
-<img height="100" alt="hypertest_logo" src="https://user-images.githubusercontent.com/1688653/159473714-384e60ba-d830-435e-a33f-730df3c3ebc6.png">
+<img height="100" alt="hyperexecute_logo" src="https://user-images.githubusercontent.com/1688653/159473714-384e60ba-d830-435e-a33f-730df3c3ebc6.png">
 
 HyperExecute is a smart test orchestration platform to run end-to-end Selenium tests at the fastest speed possible. HyperExecute lets you achieve an accelerated time to market by providing a test infrastructure that offers optimal speed, test orchestration, and detailed execution logs.
 
@@ -172,7 +172,7 @@ The CLI option *--config* is used for providing the custom HyperExecute YAML fil
 ./concierge --config yaml/testng_hyperexecute_matrix_sample.yaml --force-clean-artifacts --download-artifacts
 ```
 
-Visit [HyperExecute Automation Dashboard](https://automation.lambdatest.com/hypertest) to check the status of execution:
+Visit [HyperExecute Automation Dashboard](https://automation.lambdatest.com/hyperexecute) to check the status of execution:
 
 <img width="1414" alt="testng_matrix_execution" src="https://user-images.githubusercontent.com/1688653/160457830-2dd0789b-5f6d-4cb1-9826-910fcddf6986.png">
 
@@ -304,7 +304,7 @@ The CLI option *--config* is used for providing the custom HyperExecute YAML fil
 ./concierge --config yaml/testng_hyperexecute_autosplit_sample.yaml --force-clean-artifacts --download-artifacts
 ```
 
-Visit [HyperExecute Automation Dashboard](https://automation.lambdatest.com/hypertest) to check the status of execution
+Visit [HyperExecute Automation Dashboard](https://automation.lambdatest.com/hyperexecute) to check the status of execution
 
 <img width="1414" alt="testng_autosplit_execution" src="https://user-images.githubusercontent.com/1688653/160457854-5730c0bd-9ce0-483d-b727-f10f148c1c11.png">
 
@@ -337,7 +337,7 @@ HyperExecute lets you navigate from/to *Test Logs* in Automation Dashboard from/
 
 Shown below is the HyperExecute Automation dashboard which also lists the tests that were executed as a part of the test suite:
 
-<img width="1429" alt="testng_hypertest_automation_dashboard" src="https://user-images.githubusercontent.com/1688653/160457830-2dd0789b-5f6d-4cb1-9826-910fcddf6986.png">
+<img width="1429" alt="testng_hyperexecute_automation_dashboard" src="https://user-images.githubusercontent.com/1688653/160457830-2dd0789b-5f6d-4cb1-9826-910fcddf6986.png">
 
 Here is a screenshot that lists the automation test that was executed on the HyperExecute grid:
 
@@ -347,4 +347,3 @@ Here is a screenshot that lists the automation test that was executed on the Hyp
 * LambdaTest Support: [support@lambdatest.com](mailto:support@lambdatest.com)
 * HyperExecute HomePage: https://www.lambdatest.com/support/docs/getting-started-with-hyperexecute/
 * Lambdatest HomePage: https://www.lambdatest.com
-

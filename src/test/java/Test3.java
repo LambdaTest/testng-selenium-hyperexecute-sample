@@ -32,7 +32,7 @@ public class Test3
         capabilities.setCapability("version",version);
         */
 
-	capabilities.setCapability("platform", "Windows 11");
+	capabilities.setCapability("platform", "Windows 10");
         capabilities.setCapability("browserName", "Chrome");
         capabilities.setCapability("version","latest-1");
         capabilities.setCapability("tunnel",false);
