@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="[Demo] macOS: TestNG Execution using HyperExecute"  thread-count="1" parallel="methods">
+	<listeners>
+		<listener class-name="org.uncommons.reportng.HTMLReporter"/>
+		<listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+	</listeners>
+
+	<test name="Test_1">
+			<parameter name="browser" value="Chrome"/>
+			<parameter name="version" value="latest"/>
+			<parameter name="platform" value="MacOS Catalina"/>
+			<parameter name="resolution" value="1024x768"/>
+			<classes>
+				<class name="Test1" />
+			</classes>
+	</test>
+	<test name="Test_2">
+			<parameter name="browser" value="Firefox"/>
+			<parameter name="version" value="latest"/>
+			<parameter name="platform" value="MacOS Catalina"/>
+			<parameter name="resolution" value="1024x768"/>
+			<classes>
+				<class name="Test2" />
+			</classes>
+	</test>
+	<test name="Test_3">
+			<parameter name="browser" value="MicrosoftEdge"/>
+			<parameter name="version" value="latest"/>
+			<parameter name="platform" value="MacOS Catalina"/>
+			<parameter name="resolution" value="1024x768"/>
+			<classes>
+				<class name="Test3" />
+			</classes>
+	</test>
+	<test name="Test_4">
+			<parameter name="browser" value="MicrosoftEdge"/>
+			<parameter name="version" value="latest-2"/>
+			<parameter name="platform" value="MacOS Catalina"/>
+			<parameter name="resolution" value="1024x768"/>
+			<classes>
+				<class name="Test4" />
+			</classes>
+	</test>
+</suite>

@@ -12,11 +12,12 @@ retryOnFailure: true
 maxRetries: 5
 concurrency: 4
 
+# shell: bash
+
 env:
   # PAT: ${{ .secrets.testKey }}
   CACHE_DIR: m2_cache_dir
 
-# Dependency caching for Windows
 cacheKey: '{{ checksum "pom.xml" }}'
 cacheDirectories:
   - $CACHE_DIR
@@ -29,7 +30,7 @@ pre:
   - mvn -Dmaven.repo.local=$CACHE_DIR -Dmaven.test.skip=true clean install
 
 post:
-  - cat yaml/testng_hyperexecute_autosplit_sample.yaml
+  - cat yaml/win/testng_hyperexecute_autosplit_sample.yaml
 
 mergeArtifacts: true
 
@@ -41,7 +42,6 @@ uploadArtefacts:
 testDiscovery:
   type: raw
   mode: static
-  command: grep 'class name' testng.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
+  command: grep 'test name' xml/testng_win.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
 
-# testRunnerCommand: mvn test -Dtest=$test
-testRunnerCommand: mvn `-Dmaven.repo.local=$CACHE_DIR `-Dtest=$test
+testRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=m2_cache_dir `-DselectedTests=$test

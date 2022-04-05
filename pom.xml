@@ -16,7 +16,7 @@
     <dependency>
         <groupId>org.testng</groupId>
         <artifactId>testng</artifactId>
-        <version>6.9.10</version>
+        <version>7.5</version>
         <scope>test</scope>
     </dependency>
     <dependency>
@@ -51,7 +51,6 @@
         <artifactId>httpclient</artifactId>
         <version>4.5.13</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/com.github.sdrss/reportng -->
     <dependency>
         <groupId>org.uncommons</groupId>
         <artifactId>reportng</artifactId>
@@ -83,24 +82,41 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
-                <configuration>
-                    <properties> <property>
-                        <name>usedefaultlisteners</name>
-                        <value>false</value>
+              <executions>
+                  <execution>
+                      <phase>test</phase>
+                      <goals>
+                          <goal>test</goal>
+                      </goals>
+                  </execution>
+              </executions>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-surefire-plugin</artifactId>
+              <version>3.0.0-M5</version>
+              <configuration>
+                  <properties>
+                    <property>
+                      <name>usedefaultlisteners</name>
+                      <value>false</value>
                     </property>
-                        <property>
-                            <name>listener</name>
-                            <value>org.uncommons.reportng.HTMLReporter,
-                                   org.uncommons.reportng.JUnitXMLReporter
-                            </value>
-                     </property> </properties>
-                    <suiteXmlFiles>
-                        <!-- TestNG suite XML files -->
-                        <suiteXmlFile>testng.xml</suiteXmlFile>
-                    </suiteXmlFiles>
+                    <property>
+                        <name>listener</name>
+                        <value>org.uncommons.reportng.HTMLReporter,
+                               org.uncommons.reportng.JUnitXMLReporter
+                        </value>
+                    </property>
+                  </properties>
+                  <suiteXmlFiles>
+                      <suiteXmlFile>xml/testng_${platname}.xml</suiteXmlFile>
+                  </suiteXmlFiles>
+                  <reuseForks>true</reuseForks>
+                  <forkCount>1</forkCount>
+                  <properties>
+                    <property>
+                      <name>testnames</name>
+                      <value>${selectedTests}</value>
+                    </property>
+                  </properties>
                 </configuration>
             </plugin>
             <plugin>

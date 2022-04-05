@@ -14,13 +14,12 @@ env:
   # PAT: ${{ .secrets.testKey }}
   CACHE_DIR: m2_cache_dir
 
-# Dependency caching for Windows
 cacheKey: '{{ checksum "pom.xml" }}'
 cacheDirectories:
   - $CACHE_DIR
 
 matrix:
-  tests: ["Test1", "Test2", "Test3", "Test4" ]
+  tests: ["Test_1", "Test_2", "Test_3", "Test_4" ]
 
 # shell: bash
 
@@ -32,7 +31,7 @@ pre:
   - mvn -Dmaven.repo.local=$CACHE_DIR -Dmaven.test.skip=true clean install
 
 post:
-  - cat yaml/testng_hyperexecute_matrix_sample.yaml
+  - cat yaml/win/testng_hyperexecute_matrix_sample.yaml
 
 mergeArtifacts: true
 
@@ -42,4 +41,4 @@ uploadArtefacts:
     - target/surefire-reports/html/**
 
 testSuites:
-  - mvn `-Dmaven.repo.local=$CACHE_DIR `-Dtest=$tests
+  - mvn test `-Dplatname=win `-Dmaven.repo.local=m2_cache_dir `-DselectedTests=$tests

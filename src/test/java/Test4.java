@@ -18,15 +18,22 @@ public class Test4
     String testURL = "https://todomvc.com/examples/react/#/";
     String testURLTitle = "React • TodoMVC";
 
-    @BeforeTest
-    public void testSetUp() throws Exception
+    @BeforeMethod
+    @Parameters(value={"browser","version","platform", "resolution"})
+    public void testSetUp(String browser, String version, String platform, String resolution) throws Exception
     {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("build", "[HyperTest - 4] Demonstration of the TestNG Framework");
-        capabilities.setCapability("name", "[HyperTest - 4] Demonstration of the TestNG Framework");
-        capabilities.setCapability("platform", "Windows 10");
-        capabilities.setCapability("browserName", "Chrome");
-        capabilities.setCapability("version", "latest-3");
+        capabilities.setCapability("build", "[HyperExecute - 4] Demonstration of the TestNG Framework");
+        capabilities.setCapability("name", "[HyperExecute - 4] Demonstration of the TestNG Framework");
+
+        capabilities.setCapability("platform", platform);
+        capabilities.setCapability("browserName", browser);
+        capabilities.setCapability("version", version);
+
+        capabilities.setCapability("tunnel",false);
+        capabilities.setCapability("network",true);
+        capabilities.setCapability("console",true);
+        capabilities.setCapability("visual",true);
 
         try
         {
@@ -40,7 +47,7 @@ public class Test4
     }
 
     @Test(description="To Do App on React App")
-    public void test_element_addition() throws InterruptedException
+    public void test4_element_addition_1() throws InterruptedException
     {
         driver.get(testURL);
         Thread.sleep(5000);
@@ -54,7 +61,7 @@ public class Test4
         WebElement elem_new_item = driver.findElement(elem_new_item_locator);
 
         /* Add 5 items in the list */
-        Integer item_count = 5;
+        Integer item_count = 20;
 
         for (int count = 1; count <= item_count; count++)
         {
@@ -86,7 +93,7 @@ public class Test4
         /* Once you are outside this code, the list would be empty */
     }
 
-    @AfterTest
+    @AfterMethod
     public void tearDown()
     {
         if (driver != null)

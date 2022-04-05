@@ -19,20 +19,17 @@ public class Test2
     String testURL = "https://todomvc.com/examples/react/#/";
     String testURLTitle = "React • TodoMVC";
 
-    @BeforeTest
-    /*
+    @BeforeMethod
     @Parameters(value={"browser","version","platform", "resolution"})
     public void testSetUp(String browser, String version, String platform, String resolution) throws Exception
-    */
-    public void testSetUp() throws Exception
     {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("build", "[HyperTest - 2] Demonstration of the TestNG Framework");
-        capabilities.setCapability("name", "[HyperTest - 2] Demonstration of the TestNG Framework");
+        capabilities.setCapability("build", "[HyperExecute - 2] Demonstration of the TestNG Framework");
+        capabilities.setCapability("name", "[HyperExecute - 2] Demonstration of the TestNG Framework");
 
-        capabilities.setCapability("platform", "Windows 10");
-        capabilities.setCapability("browserName", "Firefox");
-        capabilities.setCapability("version","latest");
+        capabilities.setCapability("platform", platform);
+        capabilities.setCapability("browserName", browser);
+        capabilities.setCapability("version", version);
 
         capabilities.setCapability("tunnel",false);
         capabilities.setCapability("network",true);
@@ -51,7 +48,7 @@ public class Test2
     }
 
     @Test(description="To Do App on React App")
-    public void test_element_addition() throws InterruptedException
+    public void test2_element_addition_1() throws InterruptedException
     {
         driver.get(testURL);
         Thread.sleep(5000);
@@ -65,7 +62,7 @@ public class Test2
         WebElement elem_new_item = driver.findElement(elem_new_item_locator);
 
         /* Add 5 items in the list */
-        Integer item_count = 5;
+        Integer item_count = 10;
 
         for (int count = 1; count <= item_count; count++)
         {
@@ -98,7 +95,7 @@ public class Test2
         /* Once you are outside this code, the list would be empty */
     }
 
-    @AfterTest
+    @AfterMethod
     public void tearDown()
     {
         if (driver != null)
