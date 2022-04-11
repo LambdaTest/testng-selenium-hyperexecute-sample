@@ -72,6 +72,38 @@ set LT_USERNAME=LT_USERNAME
 set LT_ACCESS_KEY=LT_ACCESS_KEY
 ```
 
+The <b>HYPERXECUTE_PLATFORM</b> environment variable must be set to the platform (or operating system) on which you wish to perform the test execution. Here are the values that can be assigned to HYPEREXECUTE_PLATFORM
+
+* win10 for Windows OS
+* linux for Linux OS
+* macOS Catalina for macOS
+
+Use the commands mentioned below, to set the HyperExecute Platform (i.e. HYPEREXECUTE_PLATFORM) to Linux, macOS, or Windows respectively:
+
+Host OS: Linux
+
+```bash
+export HYPERXECUTE_PLATFORM=win10
+export HYPERXECUTE_PLATFORM=linux
+export HYPERXECUTE_PLATFORM=macOS Catalina
+```
+
+Host OS: macOS
+
+```bash
+export HYPERXECUTE_PLATFORM=win10
+export HYPERXECUTE_PLATFORM=linux
+export HYPERXECUTE_PLATFORM=macOS Catalina
+```
+
+Host OS: Windows
+
+```bash
+set HYPERXECUTE_PLATFORM=wind10
+set HYPERXECUTE_PLATFORM=linux
+set HYPERXECUTE_PLATFORM=macOS Catalina
+```
+
 # Matrix Execution with TestNG
 
 Matrix-based test execution is used for running the same tests across different test (or input) combinations. The Matrix directive in HyperExecute YAML file is a *key:value* pair where value is an array of strings.
