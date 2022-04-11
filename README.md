@@ -16,14 +16,14 @@ To know more about how HyperExecute does intelligent Test Orchestration, do chec
    - [Download HyperExecute CLI](#download-hyperexecute-cli)
    - [Configure Environment Variables](#configure-environment-variables)
 
-* [Matrix Execution with TestNG](#matrix-execution-with-testng)
+* [Auto-Split Execution with TestNG](#auto-split-execution-with-testng)
    - [Core](#core)
    - [Pre Steps and Dependency Caching](#pre-steps-and-dependency-caching)
    - [Post Steps](#post-steps)
    - [Artifacts Management](#artifacts-management)
    - [Test Execution](#test-execution)
 
-* [Auto-Split Execution with TestNG](#auto-split-execution-with-testng)
+* [Matrix Execution with TestNG](#matrix-execution-with-testng)
    - [Core](#core-1)
    - [Pre Steps and Dependency Caching](#pre-steps-and-dependency-caching-1)
    - [Post Steps](#post-steps-1)
@@ -71,148 +71,6 @@ For Windows:
 set LT_USERNAME=LT_USERNAME
 set LT_ACCESS_KEY=LT_ACCESS_KEY
 ```
-
-The <b>HYPERXECUTE_PLATFORM</b> environment variable must be set to the platform (or operating system) on which you wish to perform the test execution. Here are the values that can be assigned to HYPEREXECUTE_PLATFORM
-
-* win10 for Windows OS
-* linux for Linux OS
-* macOS Catalina for macOS
-
-Use the commands mentioned below, to set the HyperExecute Platform (i.e. HYPEREXECUTE_PLATFORM) to Linux, macOS, or Windows respectively:
-
-Host OS: Linux
-
-```bash
-export HYPERXECUTE_PLATFORM=win10
-export HYPERXECUTE_PLATFORM=linux
-export HYPERXECUTE_PLATFORM=macOS Catalina
-```
-
-Host OS: macOS
-
-```bash
-export HYPERXECUTE_PLATFORM=win10
-export HYPERXECUTE_PLATFORM=linux
-export HYPERXECUTE_PLATFORM=macOS Catalina
-```
-
-Host OS: Windows
-
-```bash
-set HYPERXECUTE_PLATFORM=wind10
-set HYPERXECUTE_PLATFORM=linux
-set HYPERXECUTE_PLATFORM=macOS Catalina
-```
-
-# Matrix Execution with TestNG
-
-Matrix-based test execution is used for running the same tests across different test (or input) combinations. The Matrix directive in HyperExecute YAML file is a *key:value* pair where value is an array of strings.
-
-Also, the *key:value* pairs are opaque strings for HyperExecute. For more information about matrix multiplexing, check out the [Matrix Getting Started Guide](https://www.lambdatest.com/support/docs/getting-started-with-hyperexecute/#matrix-based-build-multiplexing)
-
-### Core
-
-In the current example, matrix YAML file (*yaml/testng_hyperexecute_matrix_sample.yaml*) in the repo contains the following configuration:
-
-```yaml
-globalTimeout: 150
-testSuiteTimeout: 150
-testSuiteStep: 150
-```
-
-Global timeout, testSuite timeout, and testSuite timeout are set to 150 minutes.
- 
-The target platform is set to win. Please set the *[runson]* key to *[mac]* if the tests have to be executed on the macOS platform.
-
-```yaml
-runson: win
-```
-
-The *matrix* constitutes of the following entries - *tests*. The entries represent the class names in the test code.
-
-```yaml
-matrix:
-  tests: ["Test1", "Test2", "Test3", "Test4" ]
-```
-
-The *testSuites* object contains a list of commands (that can be presented in an array). In the current YAML file, commands for executing the tests are put in an array (with a '-' preceding each item). The Maven command *mvn test* is used to run tests located in the current project. In the current project, parallel execution is achieved at the *class* level. The *maven.repo.local* parameter in Maven is used for overriding the location where the dependent Maven packages are downloaded.
-
-```yaml
-testSuites:
-  - mvn -Dmaven.repo.local=$CACHE_DIR -Dtest=$tests
-```
-
-### Pre Steps and Dependency Caching
-
-Dependency caching is enabled in the YAML file to ensure that the package dependencies are not downloaded in subsequent runs. The first step is to set the Key used to cache directories. The directory *m2_cache_dir* is created in the project's root directory.
-
-```yaml
-env:
-  CACHE_DIR: m2_cache_dir
-
-# Dependency caching for Windows
-cacheKey: '{{ checksum "pom.xml" }}'
-cacheDirectories:
-  - $CACHE_DIR
-```
-
-Steps (or commands) that must run before the test execution are listed in the *pre* run step. In the example, the Maven packages are downloaded in the *m2_cache_dir*. To prevent test execution at the *pre* stage, the *maven.test.skip* parameter is set to *true* so that only packages are downloaded and no test execution is performed.
-
-```yaml
-pre:
-  - mkdir m2_cache_dir
-  - mvn -Dmaven.repo.local=$CACHE_DIR -Dmaven.test.skip=true clean install
-```
-
-### Post Steps
-
-Steps (or commands) that need to run after the test execution are listed in the *post* step. In the example, we *cat* the contents of *yaml/testng_hyperexecute_matrix_sample.yaml*
-
-```yaml
-post:
-  - cat yaml/testng_hyperexecute_matrix_sample.yaml
-```
-
-### Artifacts Management
-
-The *mergeArtifacts* directive (which is by default *false*) is set to *true* for merging the artifacts and combing artifacts generated under each task.
-
-The *uploadArtefacts* directive informs HyperExecute to upload artifacts [files, reports, etc.] generated after task completion. In the example, *path* consists of a regex for parsing the sure-fire (i.e. *target/surefire-reports/html*) directory that contains the HTML test reports.
-
-```yaml
-mergeArtifacts: true
-
-uploadArtefacts:
- - name: ExecutionSnapshots
-   path:
-    - target/surefire-reports/html/**
-```
-
-HyperExecute also facilitates the provision to download the artifacts on your local machine. To download the artifacts, click on Artifacts button corresponding to the associated TestID.
-
-<img width="1425" alt="testng_matrix_artefacts_1" src="https://user-images.githubusercontent.com/1688653/160457830-2dd0789b-5f6d-4cb1-9826-910fcddf6986.png">
-
-Now, you can download the artifacts by clicking on the Download button as shown below:
-
-<img width="1425" alt="testng_matrix_artefacts_2" src="https://user-images.githubusercontent.com/1688653/160457848-17d10d05-6421-4ecc-b62e-977692768607.png">
-
-## Test Execution
-
-The CLI option *--config* is used for providing the custom HyperExecute YAML file (i.e. *yaml/testng_hyperexecute_matrix_sample.yaml*). Run the following command on the terminal to trigger the tests in C# files on the HyperExecute grid. The *--download-artifacts* option is used to inform HyperExecute to download the artifacts for the job. The *--force-clean-artifacts* option force cleans any existing artifacts for the project.
-
-```bash
-./hyperexecute --config yaml/testng_hyperexecute_matrix_sample.yaml --force-clean-artifacts --download-artifacts
-```
-
-Visit [HyperExecute Automation Dashboard](https://automation.lambdatest.com/hyperexecute) to check the status of execution:
-
-<img width="1414" alt="testng_matrix_execution" src="https://user-images.githubusercontent.com/1688653/160457830-2dd0789b-5f6d-4cb1-9826-910fcddf6986.png">
-
-Shown below is the execution screenshot when the YAML file is triggered from the terminal:
-
-<img width="1413" alt="testng_cli1_execution" src="https://user-images.githubusercontent.com/1688653/159757715-a455e2d4-8081-4c6f-9836-c2e7f37d7625.png">
-
-<img width="1101" alt="testng_cli2_execution" src="https://user-images.githubusercontent.com/1688653/159757722-58a22fc1-2fb7-4a01-8bd4-98300952676b.png">
 
 ## Auto-Split Execution with TestNG
 
@@ -345,6 +203,116 @@ Shown below is the execution screenshot when the YAML file is triggered from the
 <img width="1412" alt="testng_autosplit_cli1_execution" src="https://user-images.githubusercontent.com/1688653/159758845-acae3fbe-c04f-4c0d-8c20-af39affcc3cd.png">
 
 <img width="1408" alt="testng_autosplit_cli2_execution" src="https://user-images.githubusercontent.com/1688653/159758849-dd181170-b31a-4589-80ac-e0592122a0c9.png">
+
+# Matrix Execution with TestNG
+
+Matrix-based test execution is used for running the same tests across different test (or input) combinations. The Matrix directive in HyperExecute YAML file is a *key:value* pair where value is an array of strings.
+
+Also, the *key:value* pairs are opaque strings for HyperExecute. For more information about matrix multiplexing, check out the [Matrix Getting Started Guide](https://www.lambdatest.com/support/docs/getting-started-with-hyperexecute/#matrix-based-build-multiplexing)
+
+### Core
+
+In the current example, matrix YAML file (*yaml/testng_hyperexecute_matrix_sample.yaml*) in the repo contains the following configuration:
+
+```yaml
+globalTimeout: 150
+testSuiteTimeout: 150
+testSuiteStep: 150
+```
+
+Global timeout, testSuite timeout, and testSuite timeout are set to 150 minutes.
+ 
+The target platform is set to win. Please set the *[runson]* key to *[mac]* if the tests have to be executed on the macOS platform.
+
+```yaml
+runson: win
+```
+
+The *matrix* constitutes of the following entries - *tests*. The entries represent the class names in the test code.
+
+```yaml
+matrix:
+  tests: ["Test1", "Test2", "Test3", "Test4" ]
+```
+
+The *testSuites* object contains a list of commands (that can be presented in an array). In the current YAML file, commands for executing the tests are put in an array (with a '-' preceding each item). The Maven command *mvn test* is used to run tests located in the current project. In the current project, parallel execution is achieved at the *class* level. The *maven.repo.local* parameter in Maven is used for overriding the location where the dependent Maven packages are downloaded.
+
+```yaml
+testSuites:
+  - mvn -Dmaven.repo.local=$CACHE_DIR -Dtest=$tests
+```
+
+### Pre Steps and Dependency Caching
+
+Dependency caching is enabled in the YAML file to ensure that the package dependencies are not downloaded in subsequent runs. The first step is to set the Key used to cache directories. The directory *m2_cache_dir* is created in the project's root directory.
+
+```yaml
+env:
+  CACHE_DIR: m2_cache_dir
+
+# Dependency caching for Windows
+cacheKey: '{{ checksum "pom.xml" }}'
+cacheDirectories:
+  - $CACHE_DIR
+```
+
+Steps (or commands) that must run before the test execution are listed in the *pre* run step. In the example, the Maven packages are downloaded in the *m2_cache_dir*. To prevent test execution at the *pre* stage, the *maven.test.skip* parameter is set to *true* so that only packages are downloaded and no test execution is performed.
+
+```yaml
+pre:
+  - mkdir m2_cache_dir
+  - mvn -Dmaven.repo.local=$CACHE_DIR -Dmaven.test.skip=true clean install
+```
+
+### Post Steps
+
+Steps (or commands) that need to run after the test execution are listed in the *post* step. In the example, we *cat* the contents of *yaml/testng_hyperexecute_matrix_sample.yaml*
+
+```yaml
+post:
+  - cat yaml/testng_hyperexecute_matrix_sample.yaml
+```
+
+### Artifacts Management
+
+The *mergeArtifacts* directive (which is by default *false*) is set to *true* for merging the artifacts and combing artifacts generated under each task.
+
+The *uploadArtefacts* directive informs HyperExecute to upload artifacts [files, reports, etc.] generated after task completion. In the example, *path* consists of a regex for parsing the sure-fire (i.e. *target/surefire-reports/html*) directory that contains the HTML test reports.
+
+```yaml
+mergeArtifacts: true
+
+uploadArtefacts:
+ - name: ExecutionSnapshots
+   path:
+    - target/surefire-reports/html/**
+```
+
+HyperExecute also facilitates the provision to download the artifacts on your local machine. To download the artifacts, click on Artifacts button corresponding to the associated TestID.
+
+<img width="1425" alt="testng_matrix_artefacts_1" src="https://user-images.githubusercontent.com/1688653/160457830-2dd0789b-5f6d-4cb1-9826-910fcddf6986.png">
+
+Now, you can download the artifacts by clicking on the Download button as shown below:
+
+<img width="1425" alt="testng_matrix_artefacts_2" src="https://user-images.githubusercontent.com/1688653/160457848-17d10d05-6421-4ecc-b62e-977692768607.png">
+
+## Test Execution
+
+The CLI option *--config* is used for providing the custom HyperExecute YAML file (i.e. *yaml/testng_hyperexecute_matrix_sample.yaml*). Run the following command on the terminal to trigger the tests in C# files on the HyperExecute grid. The *--download-artifacts* option is used to inform HyperExecute to download the artifacts for the job. The *--force-clean-artifacts* option force cleans any existing artifacts for the project.
+
+```bash
+./hyperexecute --config yaml/testng_hyperexecute_matrix_sample.yaml --force-clean-artifacts --download-artifacts
+```
+
+Visit [HyperExecute Automation Dashboard](https://automation.lambdatest.com/hyperexecute) to check the status of execution:
+
+<img width="1414" alt="testng_matrix_execution" src="https://user-images.githubusercontent.com/1688653/160457830-2dd0789b-5f6d-4cb1-9826-910fcddf6986.png">
+
+Shown below is the execution screenshot when the YAML file is triggered from the terminal:
+
+<img width="1413" alt="testng_cli1_execution" src="https://user-images.githubusercontent.com/1688653/159757715-a455e2d4-8081-4c6f-9836-c2e7f37d7625.png">
+
+<img width="1101" alt="testng_cli2_execution" src="https://user-images.githubusercontent.com/1688653/159757722-58a22fc1-2fb7-4a01-8bd4-98300952676b.png">
 
 ## Secrets Management
 
