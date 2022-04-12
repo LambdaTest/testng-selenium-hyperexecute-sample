@@ -41,7 +41,7 @@ uploadArtefacts:
 
 testDiscovery:
   type: raw
-  mode: static
+  mode: dynamic
   command: grep 'test name' xml/testng_win.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
 
 testRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=m2_cache_dir `-DselectedTests=$test
