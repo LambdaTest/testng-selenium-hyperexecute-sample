@@ -23,11 +23,13 @@ public class Test2
     @Parameters(value={"browser","version","platform", "resolution"})
     public void testSetUp(String browser, String version, String platform, String resolution) throws Exception
     {
+        String platformName = System.getenv("HYPEREXECUTE_PLATFORM") != null ? System.getenv("HYPEREXECUTE_PLATFORM") : platform;
+        
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("build", "[HyperExecute - 2] Demonstration of the TestNG Framework");
         capabilities.setCapability("name", "[HyperExecute - 2] Demonstration of the TestNG Framework");
 
-        capabilities.setCapability("platform", platform);
+        capabilities.setCapability("platform", platformName);
         capabilities.setCapability("browserName", browser);
         capabilities.setCapability("version", version);
 
