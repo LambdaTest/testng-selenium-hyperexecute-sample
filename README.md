@@ -18,7 +18,7 @@ Follow the below steps to use Gitpod button:
 
 1. Click on the above Gitpod button. You will be redirected to Gitpod editor tool.
 
-2. Go to ".gitpod.yml" file and insert your Lambdatest username and passkey in "LT_username" and "LT_Access_key" parameter respectivly.
+2. Go to ".gitpod.yml" file and insert your Lambdatest username and access key in "LT_username" and "LT_Access_key" parameters respectivly.
 
 3. Commit and push your changes for ".gitpod.yml" file.
 
