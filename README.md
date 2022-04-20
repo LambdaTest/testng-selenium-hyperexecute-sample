@@ -10,6 +10,20 @@ The overall experience helps teams test code and fix issues at a much faster pac
 
 To know more about how HyperExecute does intelligent Test Orchestration, do check out [HyperExecute Getting Started Guide](https://www.lambdatest.com/support/docs/getting-started-with-hyperexecute/)
 
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/LambdaTest/testng-selenium-hyperexecute-sample)
+
+# How to use Gitpod button
+
+Follow the below steps to use Gitpod button:
+
+1. Click on the above Gitpod button. You will be redirected to Gitpod editor tool.
+
+2. Go to ".gitpod.yml" file and insert your Lambdatest username and passkey in "LT_username" and "LT_Access_key" parameter respectivly.
+
+3. Commit and push your changes for ".gitpod.yml" file.
+
+4. Close the window and open new workspace. (To open new workspace type "gitpod.io#{your repository link}" in web browser)
+
 # How to run Selenium automation tests on HyperExecute (using TestNG framework)
 
 * [Pre-requisites](#pre-requisites)
