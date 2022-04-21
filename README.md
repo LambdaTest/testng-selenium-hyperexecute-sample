@@ -12,8 +12,6 @@ To know more about how HyperExecute does intelligent Test Orchestration, do chec
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/LambdaTest/testng-selenium-hyperexecute-sample)
 
-[![Run on Repl.it](https://repl.it/badge/github/LambdaTest/testng-selenium-hyperexecute-sample)](https://repl.it/github/LambdaTest/testng-selenium-hyperexecute-sample)
-
 
 # How to use Gitpod button
 
@@ -26,6 +24,8 @@ Follow the below steps to use Gitpod button:
 3. Commit and push your changes for ".gitpod.yml" file.
 
 4. Close the window and open new workspace. (To open new workspace type "gitpod.io#{your repository link}" in web browser)
+
+[![Run on Repl.it](https://repl.it/badge/github/LambdaTest/testng-selenium-hyperexecute-sample)](https://repl.it/github/LambdaTest/testng-selenium-hyperexecute-sample)
 
 # How to use Replit button
 
