@@ -1,0 +1,6 @@
+language = "bash"
+run = """
+wget https://downloads.lambdatest.com/hyperexecute/linux/hyperexecute
+chmod u+x hyperexecute
+./hyperexecute -u $USERNAME -k $ACCESS_KEY -i yaml/linux/testng_hyperexecute_autosplit_sample.yaml
+"""
