@@ -12,7 +12,7 @@ To know more about how HyperExecute does intelligent Test Orchestration, do chec
 
 Ready To Try HyperExecute? [Click Here](https://www.lambdatest.com/hyperexecute)
 
-# How to use Gitpod button [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#LT_USERNAME,LT_ACCESS_KEY/https://github.com/LambdaTest/testng-selenium-hyperexecute-sample.git)
+# How to run in Gitpod [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#LT_USERNAME,LT_ACCESS_KEY/https://github.com/LambdaTest/testng-selenium-hyperexecute-sample.git)
 
 Follow the below steps to use Gitpod button:
 
