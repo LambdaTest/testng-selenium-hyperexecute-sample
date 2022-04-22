@@ -10,37 +10,20 @@ The overall experience helps teams test code and fix issues at a much faster pac
 
 To know more about how HyperExecute does intelligent Test Orchestration, do check out [HyperExecute Getting Started Guide](https://www.lambdatest.com/support/docs/getting-started-with-hyperexecute/)
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/LambdaTest/testng-selenium-hyperexecute-sample)
+Ready To Try HyperExecute? [Click Here](https://www.lambdatest.com/hyperexecute)
 
-
-# How to use Gitpod button
+# How to use Gitpod button [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#LT_USERNAME,LT_ACCESS_KEY/https://github.com/LambdaTest/testng-selenium-hyperexecute-sample.git)
 
 Follow the below steps to use Gitpod button:
 
-1. Click on the above Gitpod button. You will be redirected to Gitpod editor tool.
+1. Click on 'Open in Gitpod' button (You will be redirected to Login/Signup page).
 
-2. Go to ".gitpod.yml" file and insert your Lambdatest username and access key in "LT_username" and "LT_Access_key" parameters respectivly.
+2. If logged in, it will be automatically redirected to Gitpod in new tab where current tab will show hyperexecute dashboard.
 
-3. Commit and push your changes for ".gitpod.yml" file.
+3. If not logged in, then user will be required to login and simultaneously redirected to Gitpod in a new tab where current tab will show hyperexecute dashboard.
 
-4. Close the window and open new workspace. (To open new workspace type "gitpod.io#{your repository link}" in web browser)
+4. If not signed up, you need to sign up and simultaneously redirected to Gitpod in a new tab where current tab will show hyperexecute dashboard.
 
-
-
-
-[![Run on Repl.it](https://repl.it/badge/github/LambdaTest/testng-selenium-hyperexecute-sample)](https://repl.it/github/LambdaTest/testng-selenium-hyperexecute-sample)
-
-# How to use Replit button
-
-Follow the below steps to use Replit button:
-
-1. Click Replit button. You will be redirected to replit editor.
-
-2. Click ‘Secrets’ on the left pan to create system environment variables by using your Lambdatest credentials.
-
-3. Replace this keys with ‘USERNAME’ and ‘ACCESS_KEY’ respectively.
-
-4. Click on ‘Run’ button.
 
 # How to run Selenium automation tests on HyperExecute (using TestNG framework)
 
