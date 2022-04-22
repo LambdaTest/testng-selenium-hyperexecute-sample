@@ -12,7 +12,7 @@ To know more about how HyperExecute does intelligent Test Orchestration, do chec
 
 Ready To Try HyperExecute? 
 
-[<img alt="alt_text" src="images/Try it Now.png" />](https://hyperexecute.lambdatest.com/)
+[<img alt="alt_text" target="_blank" src="images/Try it Now.png" />](https://hyperexecute.lambdatest.com/)
 
 # How to run in Gitpod [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#LT_USERNAME,LT_ACCESS_KEY/https://github.com/LambdaTest/testng-selenium-hyperexecute-sample.git)
 
