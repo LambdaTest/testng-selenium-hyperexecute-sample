@@ -10,21 +10,20 @@ The overall experience helps teams test code and fix issues at a much faster pac
 
 To know more about how HyperExecute does intelligent Test Orchestration, do check out [HyperExecute Getting Started Guide](https://www.lambdatest.com/support/docs/getting-started-with-hyperexecute/)
 
-Ready To Try HyperExecute? 
+# Ready To Try HyperExecute? [<img alt="Try it now" width="200 px" align="center" src="images/Try it Now.png" />](https://hyperexecute.lambdatest.com/)
 
-[<img alt="alt_text" target="_blank" src="images/Try it Now.png" />](https://hyperexecute.lambdatest.com/)
+# How to run in Gitpod [<img alt="Run in Gitpod" width="200 px" align="center" src="images/Gitpod.png" />](https://hyperexecute.lambdatest.com/?type=gitpod&framework=TestNG)
 
-# How to run in Gitpod [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#LT_USERNAME,LT_ACCESS_KEY/https://github.com/LambdaTest/testng-selenium-hyperexecute-sample.git)
+Follow the below steps to run Gitpod button:
 
-Follow the below steps to use Gitpod button:
+1. Click '**Open in Gitpod**' button (You will be redirected to Login/Signup page).
+2. Login with Lambdatest credentials and it will be redirected to Gitpod editor in new tab and current tab will show hyperexecute dashboard.
 
-1. Click on 'Open in Gitpod' button (You will be redirected to Login/Signup page).
+<!---If logged in, it will be redirected to Gitpod editor in new tab where current tab will show hyperexecute dashboard.
 
-2. If logged in, it will be automatically redirected to Gitpod in new tab where current tab will show hyperexecute dashboard.
+If not logged in, it will be redirected to Login/Signup page and simultaneously redirected to Gitpod editor in a new tab where current tab will show hyperexecute dashboard.
 
-3. If not logged in, then user will be required to login and simultaneously redirected to Gitpod in a new tab where current tab will show hyperexecute dashboard.
-
-4. If not signed up, you need to sign up and simultaneously redirected to Gitpod in a new tab where current tab will show hyperexecute dashboard.
+If not signed up, you need to sign up and simultaneously redirected to Gitpod in a new tab where current tab will show hyperexecute dashboard.--->
 
 
 # How to run Selenium automation tests on HyperExecute (using TestNG framework)
