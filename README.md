@@ -10,7 +10,7 @@ The overall experience helps teams test code and fix issues at a much faster pac
 
 To know more about how HyperExecute does intelligent Test Orchestration, do check out [HyperExecute Getting Started Guide](https://www.lambdatest.com/support/docs/getting-started-with-hyperexecute/)
 
-# Ready To Try HyperExecute? [<img alt="Try it now" width="200 px" align="center" src="images/Try it Now.png" />](https://hyperexecute.lambdatest.com/)
+### Ready To Try HyperExecute? [<img alt="Try it now" width="200 px" align="center" src="images/Try it Now.png" />](https://hyperexecute.lambdatest.com/)
 
 # How to run in Gitpod [<img alt="Run in Gitpod" width="200 px" align="center" src="images/Gitpod.png" />](https://hyperexecute.lambdatest.com/?type=gitpod&framework=TestNG)
 
