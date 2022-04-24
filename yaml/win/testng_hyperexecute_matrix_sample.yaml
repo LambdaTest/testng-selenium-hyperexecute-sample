@@ -24,8 +24,6 @@ matrix:
 # shell: bash
 
 pre:
-  # Create the Cache directory
-  - mkdir m2_cache_dir
   # Download and install packages in the CACHE_DIR.
   # Skip execution of the tests in the pre step
   - mvn -Dmaven.repo.local=$CACHE_DIR -Dmaven.test.skip=true clean install
