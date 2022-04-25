@@ -147,7 +147,6 @@ Steps (or commands) that must run before the test execution are listed in the *p
 
 ```yaml
 pre:
-  - mkdir m2_cache_dir
   - mvn -Dmaven.repo.local=$CACHE_DIR -Dmaven.test.skip=true clean install
 ```
 
@@ -291,7 +290,6 @@ Steps (or commands) that must run before the test execution are listed in the *p
 
 ```yaml
 pre:
-  - mkdir m2_cache_dir
   - mvn -Dmaven.repo.local=$CACHE_DIR -Dmaven.test.skip=true clean install
 ```
 
@@ -329,7 +327,7 @@ Now, you can download the artifacts by clicking on the Download button as shown 
 
 ## Test Execution
 
-The CLI option *--config* is used for providing the custom HyperExecute YAML file (i.e. *yaml/matrix/testng_hyperexecute_matrix_sample.yaml* on Windows and *yaml/linux/testng_hyperexecute_matrix_sample.yaml* on Linux). 
+The CLI option *--config* is used for providing the custom HyperExecute YAML file (i.e. *yaml/matrix/testng_hyperexecute_matrix_sample.yaml* on Windows and *yaml/linux/testng_hyperexecute_matrix_sample.yaml* on Linux).
 
 #### Execute TestNG tests using Matrix mechanism on Windows platform
 
