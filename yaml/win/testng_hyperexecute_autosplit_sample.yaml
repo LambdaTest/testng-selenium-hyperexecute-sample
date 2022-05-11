@@ -10,7 +10,7 @@ autosplit: true
 retryOnFailure: true
 
 maxRetries: 5
-concurrency: 4
+concurrency: 1
 
 # shell: bash
 
@@ -20,12 +20,12 @@ env:
 
 cacheKey: '{{ checksum "pom.xml" }}'
 cacheDirectories:
-  - $CACHE_DIR
+  - .m2
 
 pre:
   # Download and install packages in the CACHE_DIR.
   # Skip execution of the tests in the pre step
-  - mvn -Dmaven.repo.local=$CACHE_DIR -Dmaven.test.skip=true clean install
+  - mvn -Dmaven.repo.local=./.m2 dependency:resolve
 
 post:
   - cat yaml/win/testng_hyperexecute_autosplit_sample.yaml
@@ -42,4 +42,4 @@ testDiscovery:
   mode: dynamic
   command: grep 'test name' xml/testng_win.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
 
-testRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=m2_cache_dir `-DselectedTests=$test
+testRunnerCommand: mvn clean test `-Dmaven.repo.local=./.m2 dependency:resolve `-Dplatname=win  `-DselectedTests=$test
