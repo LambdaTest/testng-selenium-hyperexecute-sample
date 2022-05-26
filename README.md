@@ -384,7 +384,21 @@ Here is a screenshot that lists the automation test that was executed on the Hyp
 
 <img width="1429" alt="testng_testing_automation_dashboard" src="https://user-images.githubusercontent.com/1688653/159757703-4dfb2778-df76-4a4c-9991-b3ecfc52bf85.png">
 
-## We are here to help you :)
-* LambdaTest Support: [support@lambdatest.com](mailto:support@lambdatest.com)
-* HyperExecute HomePage: https://www.lambdatest.com/support/docs/getting-started-with-hyperexecute/
-* Lambdatest HomePage: https://www.lambdatest.com
+## LambdaTest Community :busts_in_silhouette:
+
+The [LambdaTest Community](https://community.lambdatest.com/) allows people to interact with tech enthusiasts. Connect, ask questions, and learn from tech-savvy people. Discuss best practises in web development, testing, and DevOps with professionals from across the globe.
+
+## Documentation & Resources :books:
+      
+If you want to learn more about the LambdaTest's features, setup, and usage, visit the [LambdaTest documentation](https://www.lambdatest.com/support/docs/). You can also find in-depth tutorials around test automation, mobile app testing, responsive testing, manual testing on [LambdaTest Blog](https://www.lambdatest.com/blog/) and [LambdaTest Learning Hub](https://www.lambdatest.com/learning-hub/).     
+      
+ ## About LambdaTest
+
+[LambdaTest](https://www.lambdatest.com) is a leading test execution and orchestration platform that is fast, reliable, scalable, and secure. It allows users to run both manual and automated testing of web and mobile apps across 3000+ different browsers, operating systems, and real device combinations. Using LambdaTest, businesses can ensure quicker developer feedback and hence achieve faster go to market. Over 500 enterprises and 1 Million + users across 130+ countries rely on LambdaTest for their testing needs.
+
+[<img height="70" src="https://user-images.githubusercontent.com/70570645/169649126-ed61f6de-49b5-4593-80cf-3391ca40d665.PNG">](https://accounts.lambdatest.com/register)
+      
+## We are here to help you :headphones:
+
+* Got a query? we are available 24x7 to help. [Contact Us](mailto:support@lambdatest.com)
+* For more info, visit - https://www.lambdatest.com
