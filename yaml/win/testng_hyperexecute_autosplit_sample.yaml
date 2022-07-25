@@ -5,6 +5,8 @@ testSuiteTimeout: 150
 testSuiteStep: 150
 
 runson: win
+
+autosplit: true
 retryOnFailure: true
 
 maxRetries: 5
@@ -18,18 +20,13 @@ cacheKey: '{{ checksum "pom.xml" }}'
 cacheDirectories:
   - .m2
 
-matrix:
-  tests: ["Test_1", "Test_2", "Test_3", "Test_4" ]
-
-# shell: bash
-
 pre:
   # Download and install packages in the CACHE_DIR.
   # Skip execution of the tests in the pre step
-  - mvn -Dmaven.repo.local=./.m2 dependency:resolve
+  - mvn `-Dmaven.repo.local=./.m2 dependency:resolve
 
 post:
-  - cat yaml/win/testng_hyperexecute_matrix_sample.yaml
+  - cat yaml/win/testng_hyperexecute_autosplit_sample.yaml
 
 mergeArtifacts: true
 
@@ -38,5 +35,9 @@ uploadArtefacts:
    path:
     - target/surefire-reports/html/**
 
-testSuites:
-  - mvn test `-Dplatname=win `-Dmaven.repo.local=./.m2 dependency:resolve `-DselectedTests=$tests
+testDiscovery:
+  type: raw
+  mode: dynamic
+  command: grep 'test name' xml/testng_mac.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/>//g'
+
+testRunnerCommand: mvn test `-Dplatname=mac `-Dmaven.repo.local=./.m2 dependency:resolve `-DselectedTests=$test
