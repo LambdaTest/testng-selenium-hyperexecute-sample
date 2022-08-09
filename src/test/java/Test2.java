@@ -29,7 +29,7 @@ public class Test2
         capabilities.setCapability("build", "[HyperExecute - 2] Demonstration of the TestNG Framework");
         capabilities.setCapability("name", "[HyperExecute - 2] Demonstration of the TestNG Framework");
 
-        capabilities.setCapability("platform", platformName);
+        capabilities.setCapability("platform", System.getenv("HYPEREXECUTE_PLATFORM"));
         capabilities.setCapability("browserName", browser);
         capabilities.setCapability("version", version);
 
