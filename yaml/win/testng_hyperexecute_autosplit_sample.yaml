@@ -9,7 +9,7 @@ runson: win
 autosplit: true
 retryOnFailure: true
 
-maxRetries: 5
+maxRetries: 1
 concurrency: 4
 
 env:
