@@ -7,7 +7,7 @@ testSuiteStep: 150
 runson: win
 retryOnFailure: true
 
-maxRetries: 5
+maxRetries: 1
 concurrency: 4
 
 env:
