@@ -12,11 +12,10 @@ concurrency: 4
 
 env:
   # PAT: ${{ .secrets.testKey }}
-  CACHE_DIR: m2_cache_dir
 
 cacheKey: '{{ checksum "pom.xml" }}'
 cacheDirectories:
-  - $CACHE_DIR
+  - .m2
 
 matrix:
   tests: ["Test_1", "Test_2", "Test_3", "Test_4" ]
@@ -26,7 +25,7 @@ matrix:
 pre:
   # Download and install packages in the CACHE_DIR.
   # Skip execution of the tests in the pre step
-  - mvn -Dmaven.repo.local=$CACHE_DIR -Dmaven.test.skip=true clean install
+  - mvn -Dmaven.repo.local=./.m2 dependency:resolve -Dmaven.test.skip=true clean install
 
 post:
   - cat yaml/win/testng_hyperexecute_matrix_sample.yaml
@@ -39,4 +38,4 @@ uploadArtefacts:
     - target/surefire-reports/html/**
 
 testSuites:
-  - mvn test `-Dplatname=win `-Dmaven.repo.local=m2_cache_dir `-DselectedTests=$tests
+  - mvn test `-Dplatname=win `-Dmaven.repo.local=./.m2 dependency:resolve `-DselectedTests=$tests
