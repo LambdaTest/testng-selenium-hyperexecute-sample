@@ -53,7 +53,7 @@ public class Test1
     {
         driver.get(testURL);
         Thread.sleep(5000);
-
+        //add 
         /* Selenium Java 3.141.59 */
         WebDriverWait wait = new WebDriverWait(driver, 5);
         /* WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); */
