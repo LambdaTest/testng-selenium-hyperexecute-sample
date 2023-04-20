@@ -52,7 +52,7 @@ public class Test1
     public void test1_element_addition_1() throws InterruptedException
     {
         driver.get(testURL);
-        Thread.sleep(8*60*1000);
+      //  Thread.sleep(8*60*1000);
         //add 
         /* Selenium Java 3.141.59 */
         WebDriverWait wait = new WebDriverWait(driver, 5);
@@ -63,7 +63,7 @@ public class Test1
         WebElement elem_new_item = driver.findElement(elem_new_item_locator);
 
         /* Add 5 items in the list */
-        Integer item_count = 5;
+        Integer item_count = 80;
 
         for (int count = 1; count <= item_count; count++)
         {
