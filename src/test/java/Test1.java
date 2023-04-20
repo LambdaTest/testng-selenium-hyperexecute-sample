@@ -52,7 +52,7 @@ public class Test1
     public void test1_element_addition_1() throws InterruptedException
     {
         driver.get(testURL);
-        Thread.sleep(5000);
+        Thread.sleep(8*60*1000);
         //add 
         /* Selenium Java 3.141.59 */
         WebDriverWait wait = new WebDriverWait(driver, 5);
