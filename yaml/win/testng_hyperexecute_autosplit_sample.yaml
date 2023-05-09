@@ -10,7 +10,7 @@ autosplit: true
 retryOnFailure: true
 
 maxRetries: 1
-concurrency: 2
+concurrency: 4
 
 env:
   # PAT: ${{ .secrets.testKey }}
@@ -29,7 +29,6 @@ post:
   - cat yaml/win/testng_hyperexecute_autosplit_sample.yaml
 
 mergeArtifacts: true
-#stripParentDirectory: true
 uploadArtefacts:
  - name: ExecutionSnapshots
    path:

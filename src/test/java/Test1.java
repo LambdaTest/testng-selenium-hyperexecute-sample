@@ -57,6 +57,7 @@ public class Test1
         ExtentTest test1 = extent.startTest("demo application test 1","To Do App test 1");
 
         driver.get(testURL);
+        Thread.sleep(5000);
         test1.log(LogStatus.PASS,"URL is opened");
       //  Thread.sleep(8*60*1000);
         //add 
