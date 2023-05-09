@@ -38,5 +38,11 @@ uploadArtefacts:
    path:
     - target/surefire-reports/html/**
 
+report: true
+partialReports:
+  location: target/surefire-reports/html
+  type: html
+  frameworkName: extent
+
 testSuites:
   - mvn test -Dplatname=linux -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$tests

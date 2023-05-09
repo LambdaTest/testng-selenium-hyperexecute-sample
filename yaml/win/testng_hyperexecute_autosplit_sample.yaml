@@ -29,11 +29,15 @@ post:
   - cat yaml/win/testng_hyperexecute_autosplit_sample.yaml
 
 mergeArtifacts: true
-
 uploadArtefacts:
  - name: ExecutionSnapshots
    path:
     - target/surefire-reports/html/**
+report: true
+partialReports:
+  location: target/surefire-reports/html
+  type: html
+  frameworkName: extent    
 
 testDiscovery:
   type: raw

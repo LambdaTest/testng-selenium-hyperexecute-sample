@@ -7,6 +7,9 @@ import org.testng.annotations.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 public class Test3
 {
@@ -50,12 +53,15 @@ public class Test3
 
     @Test(description="To Do App on React App")
     public void test3_element_addition_1() throws InterruptedException
-    {
+    {   ExtentReports extent = new ExtentReports("target/surefire-reports/html/extentReport.html");
+        ExtentTest test1 = extent.startTest("demo application test 3","To Do App test 3");
+      
         driver.get(testURL);
         Thread.sleep(5000);
-
+        test1.log(LogStatus.PASS,"URL is opened");
         /* Selenium Java 3.141.59 */
         WebDriverWait wait = new WebDriverWait(driver, 5);
+         test1.log(LogStatus.PASS, "Wait created");
         /* WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); */
 
         /* Click on the Link */
@@ -70,11 +76,13 @@ public class Test3
             /* Enter the text box for entering the new item */
             elem_new_item.click();
             elem_new_item.sendKeys("Adding a new item " + count + Keys.ENTER);
+            test1.log(LogStatus.PASS,"New item No. "+count+" is added");
             Thread.sleep(2000);
         }
 
         WebElement temp_element;
-
+        extent.endTest(test1);
+        extent.flush();
         /* Now that the items are added, we mark the top three items as completed */
         for (int count = 1; count <= item_count; count++)
         {
