@@ -49,3 +49,5 @@ testDiscovery:
   command: grep 'test name' xml/testng_linux.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/>//g'
 
 testRunnerCommand: mvn test -Dplatname=linux -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$test
+
+jobLabel: [selenium-testng, linux, autosplit]

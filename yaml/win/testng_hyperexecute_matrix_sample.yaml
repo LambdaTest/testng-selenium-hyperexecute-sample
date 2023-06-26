@@ -46,3 +46,5 @@ partialReports:
 
 testSuites:
   - mvn test `-Dplatname=win `-Dmaven.repo.local=m2_cache_dir `-DselectedTests=$tests
+
+jobLabel: [selenium-testng, win, matrix]

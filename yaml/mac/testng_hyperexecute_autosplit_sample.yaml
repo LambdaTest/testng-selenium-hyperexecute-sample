@@ -49,3 +49,5 @@ testDiscovery:
   command: grep 'test name' xml/testng_mac.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/>//g'
 
 testRunnerCommand: mvn test -Dplatname=mac -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$test
+
+jobLabel: [selenium-testng, mac, autosplit]
