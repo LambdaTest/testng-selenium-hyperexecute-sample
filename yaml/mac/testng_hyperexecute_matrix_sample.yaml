@@ -46,3 +46,5 @@ partialReports:
 
 testSuites:
   - mvn test -Dplatname=mac -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$tests
+
+jobLabel: [selenium-testng, mac, matrix]
