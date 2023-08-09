@@ -115,12 +115,6 @@
                   </suiteXmlFiles>
                   <reuseForks>true</reuseForks>
                   <forkCount>1</forkCount>
-                  <properties>
-                    <property>
-                      <name>testnames</name>
-                      <value>${selectedTests}</value>
-                    </property>
-                  </properties>
                 </configuration>
             </plugin>
             <plugin>
