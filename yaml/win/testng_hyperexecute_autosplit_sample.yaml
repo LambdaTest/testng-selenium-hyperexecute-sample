@@ -1,5 +1,5 @@
 ---
-version: 0.1
+version: 0.2
 globalTimeout: 150
 testSuiteTimeout: 150
 testSuiteStep: 150
@@ -21,29 +21,30 @@ cacheDirectories:
   - .m2
 
 pre:
-  # Download and install packages in the CACHE_DIR.
   # Skip execution of the tests in the pre step
   - mvn -Dmaven.repo.local=./.m2 dependency:resolve
 
 post:
-  - cat yaml/win/testng_hyperexecute_autosplit_sample.yaml
+  - ls target/surefire-reports/
 
 mergeArtifacts: true
+
+
 uploadArtefacts:
  - name: ExecutionSnapshots
    path:
     - target/surefire-reports/html/**
+
 report: true
 partialReports:
   location: target/surefire-reports/html
   type: html
-  frameworkName: extent    
+  frameworkName: extent
 
-testDiscovery:
-  type: raw
-  mode: dynamic
-  command: grep 'test name' xml/testng_win.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
-
-testRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=./.m2 dependency:resolve `-DselectedTests=$test
+framework:
+  name: maven/testng
+  defaultReports: false
+  flags:
+    - "-Dplatname=win"
 
 jobLabel: [selenium-testng, win, autosplit]
