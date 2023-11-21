@@ -45,6 +45,6 @@ partialReports:
   frameworkName: extent
 
 testSuites:
-  - mvn test `-Dplatname=win `-Dmaven.repo.local=m2_cache_dir `-DselectedTests=$tests
+  - mvn test `-Dplatname=win `-Dmaven.repo.local=m2_cache_dir `-DTest=$tests
 
 jobLabel: [selenium-testng, win, matrix]
