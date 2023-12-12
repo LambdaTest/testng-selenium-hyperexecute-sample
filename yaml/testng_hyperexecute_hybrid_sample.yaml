@@ -34,7 +34,7 @@ pre:
   - mvn -Dmaven.repo.local=${CACHE_DIR} -Dmaven.test.skip=true clean install
 
 post:
-    - cat yaml/${matrix.os}/testng_hyperexecute_matrix_sample.yaml
+    - cat yaml/testng_hyperexecute_hybrid_sample.yaml
 
 mergeArtifacts: true
 
@@ -42,6 +42,12 @@ uploadArtefacts:
   - name: XmlReports
     path:
       - target/surefire-reports/html/**
+
+report: true
+partialReports:
+  location: target/surefire-reports/html
+  type: html
+  frameworkName: extent
 
 linuxTestRunnerCommand: mvn test -Dplatname=linux -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$tests
 winTestRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=.m2 dependency:resolve `-DselectedTests=$tests
