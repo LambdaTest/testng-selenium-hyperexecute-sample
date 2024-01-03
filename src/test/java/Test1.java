@@ -28,7 +28,7 @@ public class Test1
         
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
-        capabilities.setCapability("build", "[HyperExecute - 1] Demonstration of the TestNG Framework");
+        capabilities.setCapability("build", "testng-selenium-hyperexecute-sample");
         capabilities.setCapability("name", "[HyperExecute - 1] Demonstration of the TestNG Framework");
         capabilities.setCapability("platform", System.getenv("HYPEREXECUTE_PLATFORM"));
         capabilities.setCapability("browserName", browser);

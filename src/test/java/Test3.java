@@ -28,7 +28,7 @@ public class Test3
         String platformName = System.getenv("HYPEREXECUTE_PLATFORM") != null ? System.getenv("HYPEREXECUTE_PLATFORM") : platform;
         
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("build", "[HyperExecute - 3] Demonstration of the TestNG Framework");
+        capabilities.setCapability("build", "testng-selenium-hyperexecute-sample");
         capabilities.setCapability("name", "[HyperExecute - 3] Demonstration of the TestNG Framework");
 
         capabilities.setCapability("platform", System.getenv("HYPEREXECUTE_PLATFORM"));
