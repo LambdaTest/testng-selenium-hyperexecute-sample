@@ -1,0 +1,59 @@
+---
+version: 0.2
+globalTimeout: 150
+testSuiteTimeout: 150
+testSuiteStep: 150
+runson: win
+autosplit: true
+retryOnFailure: true
+
+maxRetries: 1
+concurrency: 1
+pre:
+  - mvn dependency:resolve
+mergeArtifacts: true
+stripParentDirectory: true
+uploadArtefacts:
+ - name: ExecutionSnapshots
+   path:
+    - target/surefire-reports/html/**
+framework:
+  name: maven/testng
+  discoveryType: class
+  defaultReports: false
+  flags:
+    - "--file=pom02.xml"
+parallelism: 1
+platformConfig:
+  platform:
+    - os: win10
+      browserName: chrome
+      browserVersion: latest
+      build: win10
+      network: false
+    - os: win11
+      browserName: chrome
+      browserVersion: latest
+      build: win11
+      network: false
+      goog:chromeOptions:
+        args: [ "--start-maximized", "--disable-gpu" ]
+    - os: mac
+      browserName: firefox
+      browserVersion: 119
+      network: true
+      video: true
+    - os: linux
+      browserName: firefox
+      browserVersion: 115
+      network: true
+    - os: android
+      deviceName: .*
+      browserName: chrome
+    - os: ios
+      deviceName: .*
+      browserName: chrome
+  config:
+    build: latest
+    network: true
+    console: true
