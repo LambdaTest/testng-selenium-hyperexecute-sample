@@ -18,7 +18,8 @@ public class Test4
     String username = Test1.username;
     String access_key = Test1.access_key;
 
-    String testURL = "https://todomvc.com/examples/react/#/";
+//    String testURL = "https://todomvc.com/examples/react/#/";
+    String testURL = "https://takitajwar17.github.io/Simple-Todo-List-Refactored/";
     String testURLTitle = "React • TodoMVC";
 
     @BeforeMethod
@@ -54,52 +55,42 @@ public class Test4
     @Test(description="To Do App on React App")
     public void test4_element_addition_1() throws InterruptedException
     {   ExtentReports extent = new ExtentReports("target/surefire-reports/html/extentReport.html");
-        ExtentTest test1 = extent.startTest("demo application test 4","To Do App test 4");
-      
+        ExtentTest test1 = extent.startTest("demo application test 1", "To Do App test 1");
+
         driver.get(testURL);
-        test1.log(LogStatus.PASS,"URL is opened");
         Thread.sleep(5000);
 
-        /* Selenium Java 3.141.59 */
+        test1.log(LogStatus.PASS, "URL is opened");
         WebDriverWait wait = new WebDriverWait(driver, 5);
         test1.log(LogStatus.PASS, "Wait created");
-        /* WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); */
 
-        /* Click on the Link */
-        By elem_new_item_locator = By.xpath("//input[@class='new-todo']");
-        WebElement elem_new_item = driver.findElement(elem_new_item_locator);
+        By textField = By.xpath("//input[contains(@class,'input input-bordered')]");
 
-        /* Add 5 items in the list */
-        Integer item_count = 20;
+        WebElement addText = driver.findElement(textField);
 
-        for (int count = 1; count <= item_count; count++)
-        {
-            /* Enter the text box for entering the new item */
-            elem_new_item.click();
-            elem_new_item.sendKeys("Adding a new item " + count + Keys.ENTER);
-            test1.log(LogStatus.PASS,"New item No. "+count+" is added");
+        int item_count = 5;
+
+        for (int i = 1; i <= item_count; i++) {
+            addText.click();
+            addText.sendKeys("Adding a new item " + i + Keys.ENTER);
+            test1.log(LogStatus.PASS, "New item No. " + i + " is added");
             Thread.sleep(2000);
         }
-        extent.endTest(test1);
-        extent.flush();
+
         WebElement temp_element;
 
-        /* Now that the items are added, we mark the top three items as completed */
-        for (int count = 1; count <= item_count; count++)
-        {
-            Integer fixed_cta_count = 1;
+        for (int i = 1; i <= item_count; i++) {
 
-            /* Enter the text box for entering the new item */
-            /* Create a varying string to create a new XPath */
-            String xpath_str = "//ul[@class='todo-list']/li[" + fixed_cta_count + "]" + "//input[@class='toggle']";
-            temp_element = driver.findElement(By.xpath(xpath_str));
-
-            temp_element.click();
-            Thread.sleep(2000);
-            /* Toggle button to destroy */
-            driver.findElement(By.xpath("//li[@class='completed']//button[@class='destroy']")).click();
+            driver.findElement(By.xpath("//i[contains(@class,'bx bx-check')]")).click();
             Thread.sleep(1000);
+            test1.log(LogStatus.PASS, "Item No. " + i + " marked completed");
+            driver.findElement(By.xpath("//i[contains(@class,'bx bx-trash')]")).click();
+            Thread.sleep(1000);
+            test1.log(LogStatus.PASS, "Item No. " + i + " deleted");
         }
+
+        extent.endTest(test1);
+        extent.flush();
 
         /* Once you are outside this code, the list would be empty */
     }
