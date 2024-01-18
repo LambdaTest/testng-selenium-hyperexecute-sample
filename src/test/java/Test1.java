@@ -3,6 +3,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.*;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -19,8 +20,8 @@ public class Test1
     public static String access_key = System.getenv("LT_ACCESS_KEY");
 
 //    String testURL = "https://todomvc.com/examples/react/#/";
-    String testURL = "https://takitajwar17.github.io/Simple-Todo-List-Refactored/";
-    String testURLTitle = "React • TodoMVC";
+    String testURL = "https://lambdatest.github.io/sample-todo-app/";
+    String testURLTitle = "Sample page - lambdatest.com";
     @BeforeMethod
     @Parameters(value={"browser","version","platform", "resolution"})
     public void testSetUp(String browser, String version, String platform, String resolution) throws Exception
@@ -55,7 +56,7 @@ public class Test1
     public void test1_element_addition_1() throws InterruptedException
     {
         ExtentReports extent = new ExtentReports("target/surefire-reports/html/extentReport.html");
-        ExtentTest test1 = extent.startTest("demo application test 1", "To Do App test 1");
+        ExtentTest test1 = extent.startTest("demo application test 1-1", "To Do App test 1");
 
         driver.get(testURL);
         Thread.sleep(5000);
@@ -64,7 +65,7 @@ public class Test1
         WebDriverWait wait = new WebDriverWait(driver, 5);
         test1.log(LogStatus.PASS, "Wait created");
 
-        By textField = By.xpath("//input[contains(@class,'input input-bordered')]");
+        By textField = By.id("sampletodotext");
 
         WebElement addText = driver.findElement(textField);
 
@@ -79,14 +80,27 @@ public class Test1
 
         WebElement temp_element;
 
-        for (int i = 1; i <= item_count; i++) {
+        int totalCount = item_count+5;
+        int remaining = totalCount-1;
 
-            driver.findElement(By.xpath("//i[contains(@class,'bx bx-check')]")).click();
-            Thread.sleep(1000);
+        for (int i = 1; i <= totalCount; i++, remaining--) {
+
+            String xpath = "(//input[@type='checkbox'])["+i+"]";
+
+            driver.findElement(By.xpath(xpath)).click();
+            Thread.sleep(500);
             test1.log(LogStatus.PASS, "Item No. " + i + " marked completed");
-            driver.findElement(By.xpath("//i[contains(@class,'bx bx-trash')]")).click();
-            Thread.sleep(1000);
-            test1.log(LogStatus.PASS, "Item No. " + i + " deleted");
+            By remainingItem = By.className("ng-binding");
+            String actualText = driver.findElement(remainingItem).getText();
+            String expectedText = remaining+" of "+totalCount+" remaining";
+
+            if (!expectedText.equals(actualText)) {
+                test1.log(LogStatus.FAIL, "Wrong Text Description");
+                status = "failed";
+            }
+            Thread.sleep(500);
+
+            test1.log(LogStatus.PASS, "Item No. " + i + " completed");
         }
 
         extent.endTest(test1);
@@ -99,7 +113,7 @@ public class Test1
     public void test1_element_addition_2() throws InterruptedException
     {
         ExtentReports extent = new ExtentReports("target/surefire-reports/html/extentReport.html");
-        ExtentTest test2 = extent.startTest("demo application test 2", "To Do App test 2");
+        ExtentTest test2 = extent.startTest("demo application test 1-2", "To Do App test 2");
 
         driver.get(testURL);
         Thread.sleep(5000);
@@ -108,7 +122,7 @@ public class Test1
         WebDriverWait wait = new WebDriverWait(driver, 5);
         test2.log(LogStatus.PASS, "Wait created");
 
-        By textField = By.xpath("//input[contains(@class,'input input-bordered')]");
+        By textField = By.id("sampletodotext");
 
         WebElement addText = driver.findElement(textField);
 
@@ -123,14 +137,27 @@ public class Test1
 
         WebElement temp_element;
 
-        for (int i = 1; i <= item_count; i++) {
+        int totalCount = item_count+5;
+        int remaining = totalCount-1;
 
-            driver.findElement(By.xpath("//i[contains(@class,'bx bx-check')]")).click();
-            Thread.sleep(1000);
+        for (int i = 1; i <= totalCount; i++, remaining--) {
+
+            String xpath = "(//input[@type='checkbox'])["+i+"]";
+
+            driver.findElement(By.xpath(xpath)).click();
+            Thread.sleep(500);
             test2.log(LogStatus.PASS, "Item No. " + i + " marked completed");
-            driver.findElement(By.xpath("//i[contains(@class,'bx bx-trash')]")).click();
-            Thread.sleep(1000);
-            test2.log(LogStatus.PASS, "Item No. " + i + " deleted");
+            By remainingItem = By.className("ng-binding");
+            String actualText = driver.findElement(remainingItem).getText();
+            String expectedText = remaining+" of "+totalCount+" remaining";
+
+            if (!expectedText.equals(actualText)) {
+                test2.log(LogStatus.FAIL, "Wrong Text Description");
+                status = "failed";
+            }
+            Thread.sleep(500);
+
+            test2.log(LogStatus.PASS, "Item No. " + i + " completed");
         }
 
         extent.endTest(test2);

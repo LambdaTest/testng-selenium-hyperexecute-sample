@@ -7,7 +7,7 @@ runson: ${matrix.os}
 retryOnFailure: false
 autosplit: true
 maxRetries: 1
-parallelism: 2
+parallelism: 1
 concurrency: 3
 
 matrix:
@@ -23,15 +23,17 @@ cacheDirectories:
 testDiscovery:
     type: raw
     mode: dynamic
+    command: |
+      grep 'test name' xml/testng_win11.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
     macCommand: |
         grep 'test name' xml/testng_mac.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
     winCommand: | 
         grep 'test name' xml/testng_win.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
     linuxCommand: |
-        grep 'test name' xml/testng_linux.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g' ${param}
+        grep 'test name' xml/testng_linux.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
 
 pre:
-  - mvn -Dmaven.repo.local=${CACHE_DIR} -Dmaven.test.skip=true clean install
+  - mvn -Dmaven.test.skip=true clean install
 
 post:
     - cat yaml/testng_hyperexecute_hybrid_sample.yaml
@@ -49,8 +51,9 @@ partialReports:
   type: html
   frameworkName: extent
 
+testRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=.m2 dependency:resolve `-DselectedTests=$tests
 linuxTestRunnerCommand: mvn test -Dplatname=linux -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$tests
 winTestRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=.m2 dependency:resolve `-DselectedTests=$tests
-macTestRunnerCommand: mvn test -Dplatname=mac -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$tests
+macTestRunnerCommand: mvn test -Dplatname=mac dependency:resolve -DselectedTests=$tests
 
 jobLabel: [selenium-testng, hybrid]

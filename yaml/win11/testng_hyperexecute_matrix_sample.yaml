@@ -1,34 +1,37 @@
 ---
-version: 0.2
+version: 0.1
 globalTimeout: 150
 testSuiteTimeout: 150
 testSuiteStep: 150
 
-runson: mac
-
-autosplit: true
+runson: win11
 retryOnFailure: true
 
 maxRetries: 1
 concurrency: 4
-shell: bash
+
 env:
   # PAT: ${{ .secrets.testKey }}
   CACHE_DIR: m2_cache_dir
 
 cacheKey: '{{ checksum "pom.xml" }}'
 cacheDirectories:
-  - .m2
+  - ${CACHE_DIR}
+
+matrix:
+  tests: ["Test_1", "Test_2", "Test_3", "Test_4" ]
+
+# shell: bash
 
 pre:
+  # Download and install packages in the CACHE_DIR.
   # Skip execution of the tests in the pre step
-  - mvn dependency:resolve
+  - mvn -Dmaven.repo.local=${CACHE_DIR} -Dmaven.test.skip=true clean install
 
 post:
-  - ls target/surefire-reports/
+  - cat yaml/win/testng_hyperexecute_matrix_sample.yaml
 
 mergeArtifacts: true
-
 
 uploadArtefacts:
  - name: ExecutionSnapshots
@@ -41,11 +44,7 @@ partialReports:
   type: html
   frameworkName: extent
 
-framework:
-  name: maven/testng
-  defaultReports: false
-  flags:
-    - "-Dplatname=mac"
-    - "--file=pom02.xml"
+testSuites:
+  - mvn test `-Dplatname=win `-Dmaven.repo.local=m2_cache_dir `-DTest=$tests
 
-jobLabel: [selenium-testng, mac, autosplit]
+jobLabel: [selenium-testng, win, matrix]
