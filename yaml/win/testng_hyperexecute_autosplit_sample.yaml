@@ -46,5 +46,6 @@ framework:
   defaultReports: false
   flags:
     - "-Dplatname=win"
+    - "--file=pom02.xml"
 
 jobLabel: [selenium-testng, win, autosplit]

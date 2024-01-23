@@ -4,14 +4,14 @@ globalTimeout: 150
 testSuiteTimeout: 150
 testSuiteStep: 150
 
-runson: mac
+runson: win11
 
 autosplit: true
 retryOnFailure: true
 
 maxRetries: 1
 concurrency: 4
-shell: bash
+
 env:
   # PAT: ${{ .secrets.testKey }}
   CACHE_DIR: m2_cache_dir
@@ -22,7 +22,7 @@ cacheDirectories:
 
 pre:
   # Skip execution of the tests in the pre step
-  - mvn dependency:resolve
+  - mvn -Dmaven.repo.local=./.m2 dependency:resolve
 
 post:
   - ls target/surefire-reports/
@@ -45,7 +45,7 @@ framework:
   name: maven/testng
   defaultReports: false
   flags:
-    - "-Dplatname=mac"
+    - "-Dplatname=win"
     - "--file=pom02.xml"
 
-jobLabel: [selenium-testng, mac, autosplit]
+jobLabel: [selenium-testng, win11, autosplit]

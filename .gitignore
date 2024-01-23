@@ -6,3 +6,8 @@ concierge.exe
 logs/
 nucleus.log
 artifacts
+.idea/
+.mvn/
+target/
+hyperexecute-cli.log
+test-output/

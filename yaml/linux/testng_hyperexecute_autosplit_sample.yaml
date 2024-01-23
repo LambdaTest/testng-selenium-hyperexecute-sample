@@ -48,5 +48,6 @@ framework:
   defaultReports: false
   flags:
     - "-Dplatname=linux"
+    - "--file=pom02.xml"
 
 jobLabel: [selenium-testng, linux, autosplit]

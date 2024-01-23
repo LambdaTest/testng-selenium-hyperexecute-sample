@@ -1,5 +1,5 @@
 ---
-version: 0.2
+version: 0.1
 globalTimeout: 150
 testSuiteTimeout: 150
 testSuiteStep: 150
@@ -9,9 +9,11 @@ runson: mac
 autosplit: true
 retryOnFailure: true
 
-maxRetries: 1
+maxRetries: 5
 concurrency: 4
+
 shell: bash
+
 env:
   # PAT: ${{ .secrets.testKey }}
   CACHE_DIR: m2_cache_dir
@@ -21,31 +23,29 @@ cacheDirectories:
   - .m2
 
 pre:
+  # Download and install packages in the CACHE_DIR.
   # Skip execution of the tests in the pre step
   - mvn dependency:resolve
 
 post:
-  - ls target/surefire-reports/
+  - cat yaml/mac/v1/testng_hyperexecute_autosplit_sample.yaml
 
 mergeArtifacts: true
-
 
 uploadArtefacts:
  - name: ExecutionSnapshots
    path:
     - target/surefire-reports/html/**
 
+testDiscovery:
+  type: raw
+  mode: dynamic
+  command: grep 'test name' xml/testng_mac.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/>//g'
+
+testRunnerCommand: mvn test -Dplatname=mac dependency:resolve -DselectedTests=$test
+
 report: true
 partialReports:
   location: target/surefire-reports/html
   type: html
   frameworkName: extent
-
-framework:
-  name: maven/testng
-  defaultReports: false
-  flags:
-    - "-Dplatname=mac"
-    - "--file=pom02.xml"
-
-jobLabel: [selenium-testng, mac, autosplit]

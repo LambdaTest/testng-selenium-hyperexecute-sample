@@ -18,8 +18,9 @@ public class Test2
     String username = Test1.username;
     String access_key = Test1.access_key;
 
-    String testURL = "https://todomvc.com/examples/react/#/";
-    String testURLTitle = "React • TodoMVC";
+//    String testURL = "https://todomvc.com/examples/react/#/";
+    String testURL = "https://lambdatest.github.io/sample-todo-app/";
+    String testURLTitle = "Sample page - lambdatest.com";
     @BeforeMethod
     @Parameters(value={"browser","version","platform", "resolution"})
     public void testSetUp(String browser, String version, String platform, String resolution) throws Exception
@@ -53,52 +54,55 @@ public class Test2
     @Test(description="To Do App on React App")
     public void test2_element_addition_1() throws InterruptedException
     {   ExtentReports extent = new ExtentReports("target/surefire-reports/html/extentReport.html");
-        ExtentTest test1 = extent.startTest("demo application test 2","To Do App test 2");
-      
+        ExtentTest test1 = extent.startTest("demo application test 2-1", "To Do App test 1");
+
         driver.get(testURL);
-        test1.log(LogStatus.PASS,"URL is opened");
         Thread.sleep(5000);
 
-        /* Selenium Java 3.141.59 */
+        test1.log(LogStatus.PASS, "URL is opened");
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        /* WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); */
-         test1.log(LogStatus.PASS, "Wait created");
-        /* Click on the Link */
-        By elem_new_item_locator = By.xpath("//input[@class='new-todo']");
-        WebElement elem_new_item = driver.findElement(elem_new_item_locator);
+        test1.log(LogStatus.PASS, "Wait created");
 
-        /* Add 5 items in the list */
-        Integer item_count = 10;
+        By textField = By.id("sampletodotext");
 
-        for (int count = 1; count <= item_count; count++)
-        {
-            /* Enter the text box for entering the new item */
-            elem_new_item.click();
-            elem_new_item.sendKeys("Adding a new item " + count + Keys.ENTER);
-            test1.log(LogStatus.PASS,"New item No. "+count+" is added");
+        WebElement addText = driver.findElement(textField);
+
+        int item_count = 5;
+
+        for (int i = 1; i <= item_count; i++) {
+            addText.click();
+            addText.sendKeys("Adding a new item " + i + Keys.ENTER);
+            test1.log(LogStatus.PASS, "New item No. " + i + " is added");
             Thread.sleep(2000);
         }
-        extent.endTest(test1);
-        extent.flush();
+
         WebElement temp_element;
 
-        /* Now that the items are added, we mark the top three items as completed */
-        for (int count = 1; count <= item_count; count++)
-        {
-            Integer fixed_cta_count = 1;
+        int totalCount = item_count+5;
+        int remaining = totalCount-1;
 
-            /* Enter the text box for entering the new item */
-            /* Create a varying string to create a new XPath */
-            /* String xpath_str = "//ul[@class='todo-list']/li[" + count + "]" + "//input[@class='toggle']"; */
-            String xpath_str = "//ul[@class='todo-list']/li[" + fixed_cta_count + "]" + "//input[@class='toggle']";
-            temp_element = driver.findElement(By.xpath(xpath_str));
+        for (int i = 1; i <= totalCount; i++, remaining--) {
 
-            temp_element.click();
-            Thread.sleep(2000);
-            /* Toggle button to destroy */
-            driver.findElement(By.xpath("//li[@class='completed']//button[@class='destroy']")).click();
-            Thread.sleep(1000);
+            String xpath = "(//input[@type='checkbox'])["+i+"]";
+
+            driver.findElement(By.xpath(xpath)).click();
+            Thread.sleep(500);
+            test1.log(LogStatus.PASS, "Item No. " + i + " marked completed");
+            By remainingItem = By.className("ng-binding");
+            String actualText = driver.findElement(remainingItem).getText();
+            String expectedText = remaining+" of "+totalCount+" remaining";
+
+            if (!expectedText.equals(actualText)) {
+                test1.log(LogStatus.FAIL, "Wrong Text Description");
+                status = "failed";
+            }
+            Thread.sleep(500);
+
+            test1.log(LogStatus.PASS, "Item No. " + i + " completed");
         }
+
+        extent.endTest(test1);
+        extent.flush();
 
         /* Once you are outside this code, the list would be empty */
     }
