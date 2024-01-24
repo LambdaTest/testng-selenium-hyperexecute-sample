@@ -12,17 +12,9 @@ retryOnFailure: true
 maxRetries: 1
 concurrency: 4
 
-env:
-  # PAT: ${{ .secrets.testKey }}
-  CACHE_DIR: m2_cache_dir
-
-cacheKey: '{{ checksum "pom.xml" }}'
-cacheDirectories:
-  - .m2
-
 pre:
   # Skip execution of the tests in the pre step
-  - mvn -Dmaven.repo.local=./.m2 dependency:resolve
+  - mvn dependency:resolve
 
 post:
   - ls target/surefire-reports/
@@ -45,7 +37,7 @@ framework:
   name: maven/testng
   defaultReports: false
   flags:
-    - "-Dplatname=win"
+    - "-Dplatname=win11"
     - "--file=pom02.xml"
 
 jobLabel: [selenium-testng, win11, autosplit]
