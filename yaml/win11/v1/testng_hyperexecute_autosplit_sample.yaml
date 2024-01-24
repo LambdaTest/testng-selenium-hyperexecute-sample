@@ -47,3 +47,5 @@ partialReports:
   location: target/surefire-reports/html
   type: html
   frameworkName: extent
+
+jobLabel: [selenium-testng, win11, v1, autosplit]
