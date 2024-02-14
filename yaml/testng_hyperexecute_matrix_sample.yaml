@@ -1,0 +1,82 @@
+---
+version: 0.1
+globalTimeout: 150
+testSuiteTimeout: 150
+testSuiteStep: 150
+runson: "win"
+retryOnFailure: true
+maxRetries: 5
+concurrency: 2
+env:
+  CACHE_DIR: m2_cache_dir
+cacheKey: '{{ checksum "pom.xml" }}'
+cacheDirectories:
+  - .m2
+matrix:
+  tests: ["Test_1"]
+  count: [setcount]
+pre:
+  - mvn -Dmaven.repo.local=m2_cache_dir -Dmaven.test.skip=true clean install
+mergeArtifacts: true
+uploadArtefacts:
+- name: "ExecutionSnapshots"
+  path:
+  - "target/surefire-reports/html/**"
+testSuites:
+  - mvn test `-Dmaven.repo.local=./.m2 dependency:resolve
+
+# Add your LambdaTest userName and accessKey here or set LAMBDATEST_USERNAME and
+# LAMBDATEST_ACCESS_KEY as env variables
+# userName: YOUR_USERNAME
+# accessKey: YOUR_ACCESS_KEY
+
+# ======================
+# LambdaTest Reporting
+# ======================
+# The following capabilities are used to set up reporting on LambdaTest:
+# Set platform to runson for your test
+# os: win10/win11/linux/mac/android/ios
+# Set build name like this
+# build: LambdaTest Samples
+# Set Browser capability using this
+# browserName: chrome
+# Set network capability
+# network: true/false
+# you can set any capability from here (https://www.lambdatest.com/capabilities-generator/)
+
+# for example:
+platformConfig:
+  platform:
+    - os: win10
+      browserName: chrome
+      browserVersion: latest
+      build: win10
+      network: false
+    - os: win11
+      browserName: chrome
+      browserVersion: latest
+      build: win11
+      network: false
+      goog:chromeOptions:
+        args: [ "--start-maximized", "--disable-gpu" ]
+    - os: mac
+      browserName: firefox
+      browserVersion: 119
+      network: true
+      video: true
+    - os: linux
+      browserName: firefox
+      browserVersion: 115
+      network: true
+    - os: android
+      deviceName: .*
+      browserName: chrome
+    - os: ios
+      deviceName: .*
+      browserName: chrome
+
+  # You can set common capabilities also which will be mergeArtifacts to each above capability ( priority will be specific capability mentioned above)
+  config:
+    build: latest
+    network: true
+    console: true
