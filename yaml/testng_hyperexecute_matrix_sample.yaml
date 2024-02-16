@@ -5,7 +5,7 @@ testSuiteTimeout: 150
 testSuiteStep: 150
 runson: "win"
 retryOnFailure: true
-maxRetries: 5
+maxRetries: 1
 concurrency: 2
 env:
   CACHE_DIR: m2_cache_dir
@@ -14,16 +14,15 @@ cacheDirectories:
   - .m2
 matrix:
   tests: ["Test_1"]
-  count: [setcount]
 pre:
-  - mvn -Dmaven.repo.local=m2_cache_dir -Dmaven.test.skip=true clean install
+  - mvn -Dmaven.test.skip=true clean install
 mergeArtifacts: true
 uploadArtefacts:
 - name: "ExecutionSnapshots"
   path:
   - "target/surefire-reports/html/**"
 testSuites:
-  - mvn test `-Dmaven.repo.local=./.m2 dependency:resolve
+  - mvn test dependency:resolve
 
 # Add your LambdaTest userName and accessKey here or set LAMBDATEST_USERNAME and
 # LAMBDATEST_ACCESS_KEY as env variables

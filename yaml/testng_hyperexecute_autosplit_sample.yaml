@@ -12,9 +12,9 @@ env:
   CACHE_DIR: m2_cache_dir
 cacheKey: '{{ checksum "pom.xml" }}'
 cacheDirectories:
-  - .m2
+  - m2_cache
 pre:
-  - mvn -Dmaven.repo.local=./.m2 dependency:resolve
+  - mvn dependency:resolve
 mergeArtifacts: true
 uploadArtefacts:
  - name: ExecutionSnapshots
@@ -25,7 +25,10 @@ testDiscovery:
   type: raw
   mode: dynamic
   command: grep 'test name' xml/testng.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
-testRunnerCommand: mvn test `-Dmaven.repo.local=./.m2 dependency:resolve
+testRunnerCommand: mvn test dependency:resolve
+winTestRunnerCommand: mvn test dependency:resolve
+macTestRunnerCommand: mvn test dependency:resolve
+linuxTestRunnerCommand: mvn test dependency:resolve
 report: true
 partialReports:
   location: target/surefire-reports/html
