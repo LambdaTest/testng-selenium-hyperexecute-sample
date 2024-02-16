@@ -31,9 +31,9 @@ parallelism: 1
 # accessKey: YOUR_ACCESS_KEY
 
 # ======================
-# LambdaTest Reporting
+# LambdaTest Local Driver Capability
 # ======================
-# The following capabilities are used to set up reporting on LambdaTest:
+# The following capabilities are used to run test with  Local Driver setup on LambdaTest:
 # Set platform to runson for your test
 # os: win10/win11/linux/mac/android/ios
 # Set build name like this
