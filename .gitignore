@@ -6,5 +6,5 @@ concierge.exe
 logs/
 nucleus.log
 artifacts
-/target
-/target/*
+target
+target/*
