@@ -12,9 +12,9 @@ env:
   CACHE_DIR: m2_cache_dir
 cacheKey: '{{ checksum "pom.xml" }}'
 cacheDirectories:
-  - .m2
+  - m2_cache
 pre:
-  - mvn -Dmaven.repo.local=./.m2 dependency:resolve
+  - mvn dependency:resolve
 mergeArtifacts: true
 uploadArtefacts:
  - name: ExecutionSnapshots
@@ -25,22 +25,20 @@ testDiscovery:
   type: raw
   mode: dynamic
   command: grep 'test name' xml/testng.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
-testRunnerCommand: mvn test `-Dmaven.repo.local=./.m2 dependency:resolve
+testRunnerCommand: mvn test dependency:resolve
+winTestRunnerCommand: mvn test dependency:resolve
+macTestRunnerCommand: mvn test dependency:resolve
+linuxTestRunnerCommand: mvn test dependency:resolve
 report: true
 partialReports:
   location: target/surefire-reports/html
   type: html
   frameworkName: extent
 
-# Add your LambdaTest userName and accessKey here or set LAMBDATEST_USERNAME and
-# LAMBDATEST_ACCESS_KEY as env variables
-# userName: YOUR_USERNAME
-# accessKey: YOUR_ACCESS_KEY
-
 # ======================
-# LambdaTest Reporting
+# LambdaTest Local Driver Capability
 # ======================
-# The following capabilities are used to set up reporting on LambdaTest:
+# The following capabilities are used to run test with Local Driver setup on LambdaTest:
 # Set platform to runson for your test
 # os: win10/win11/linux/mac/android/ios
 # Set build name like this
