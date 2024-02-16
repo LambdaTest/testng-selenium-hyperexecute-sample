@@ -25,15 +25,10 @@ framework:
     - "--file=pom02.xml"
 parallelism: 1
 
-# Add your LambdaTest userName and accessKey here or set LAMBDATEST_USERNAME and
-# LAMBDATEST_ACCESS_KEY as env variables
-# userName: YOUR_USERNAME
-# accessKey: YOUR_ACCESS_KEY
-
 # ======================
 # LambdaTest Local Driver Capability
 # ======================
-# The following capabilities are used to run test with  Local Driver setup on LambdaTest:
+# The following capabilities are used to run test with Local Driver setup on LambdaTest:
 # Set platform to runson for your test
 # os: win10/win11/linux/mac/android/ios
 # Set build name like this
