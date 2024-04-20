@@ -1,0 +1,24 @@
+name: Hyperexecute-TestNG-Sample - merge trigger
+
+on:
+  pull_request:
+    types:
+      - closed
+  
+jobs:
+  Hyperexecute-TestNG-Sample:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+
+      - name: Starting CLI testing
+        shell: bash
+        run: |
+          curl https://downloads.lambdatest.com/hyperexecute/linux/hyperexecute -o hyperexecute
+          chmod +x hyperexecute
+          ./hyperexecute --user ${{ secrets.username }} --key ${{ secrets.accesskey }} --download-artifacts --config yaml/win/testng_hyperexecute_autosplit_sample.yaml
+          echo "Test completion"
