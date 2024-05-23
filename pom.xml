@@ -118,7 +118,8 @@
                   <forkCount>1</forkCount>
                   <properties>
                     <property>
-                      <name>testname</name>
+                      <name>testnames</name>
+                      <value>${selectedTests}</value>
                     </property>
                   </properties>
                 </configuration>
