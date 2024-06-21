@@ -1,4 +1,4 @@
-import org.openqa.selenium.WebDriver;
+package sample;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -21,10 +21,13 @@ public class Test3
 //    String testURL = "https://todomvc.com/examples/react/#/";
     String testURL = "https://lambdatest.github.io/sample-todo-app/";
     String testURLTitle = "Sample page - lambdatest.com";
+    public static String browser = "Chrome";
+    public static String version = "latest";
+    public static String platform = "Windows";
+    public static String resolution = "1024x768";
 
     @BeforeMethod
-    @Parameters(value={"browser","version","platform", "resolution"})
-    public void testSetUp(String browser, String version, String platform, String resolution) throws Exception
+    public void testSetUp() throws Exception
     {
         String platformName = System.getenv("HYPEREXECUTE_PLATFORM") != null ? System.getenv("HYPEREXECUTE_PLATFORM") : platform;
         
