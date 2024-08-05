@@ -63,7 +63,6 @@ public class Test2
         test1.log(LogStatus.PASS, "URL is opened");
         WebDriverWait wait = new WebDriverWait(driver, 5);
         test1.log(LogStatus.PASS, "Wait created");
-        Thread.sleep(500);
         By textField = By.id("sampletodotext");
 
         WebElement addText = driver.findElement(textField);
