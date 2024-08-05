@@ -11,6 +11,7 @@ import java.time.Duration;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+
 public class Test2
 {
     WebDriver driver = null;
@@ -18,9 +19,9 @@ public class Test2
     String username = Test1.username;
     String access_key = Test1.access_key;
 
-//    String testURL = "https://todomvc.com/examples/react/#/";
     String testURL = "https://lambdatest.github.io/sample-todo-app/";
     String testURLTitle = "Sample page - lambdatest.com";
+
     @BeforeMethod
     @Parameters(value={"browser","version","platform", "resolution"})
     public void testSetUp(String browser, String version, String platform, String resolution) throws Exception
@@ -33,7 +34,7 @@ public class Test2
 
         capabilities.setCapability("platform", System.getenv("HYPEREXECUTE_PLATFORM"));
         capabilities.setCapability("browserName", browser);
-        capabilities.setCapability("version", version);
+        capabilities.setCapability("version",version);
 
         capabilities.setCapability("tunnel",false);
         capabilities.setCapability("network",true);
@@ -62,7 +63,6 @@ public class Test2
         test1.log(LogStatus.PASS, "URL is opened");
         WebDriverWait wait = new WebDriverWait(driver, 5);
         test1.log(LogStatus.PASS, "Wait created");
-
         By textField = By.id("sampletodotext");
 
         WebElement addText = driver.findElement(textField);
