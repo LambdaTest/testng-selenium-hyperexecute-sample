@@ -26,11 +26,11 @@ testDiscovery:
     command: |
       grep 'test name' xml/testng_win11.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
     macCommand: |
-        grep 'test name' xml/testng_mac.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
+      grep 'test name' xml/testng_mac.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
     winCommand: | 
-        grep 'test name' xml/testng_win.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
+      grep 'test name' xml/testng_win.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
     linuxCommand: |
-        grep 'test name' xml/testng_linux.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
+      grep 'test name' xml/testng_linux.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
 
 pre:
   - mvn -Dmaven.test.skip=true clean install
@@ -39,7 +39,7 @@ post:
     - cat yaml/testng_hyperexecute_hybrid_sample.yaml
 
 mergeArtifacts: true
-
+ 
 uploadArtefacts:
   - name: XmlReports
     path:
@@ -51,9 +51,8 @@ partialReports:
   type: html
   frameworkName: extent
 
-testRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=.m2 dependency:resolve `-DselectedTests=$tests
-linuxTestRunnerCommand: mvn test -Dplatname=linux -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$tests
-winTestRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=.m2 dependency:resolve `-DselectedTests=$tests
-macTestRunnerCommand: mvn test -Dplatname=mac dependency:resolve -DselectedTests=$tests
+linuxTestRunnerCommand: mvn test -Dplatname=linux -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$test
+winTestRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=./.m2 dependency:resolve `-DselectedTests=$test
+macTestRunnerCommand: mvn test -Dplatname=mac dependency:resolve -DselectedTests=$test
 
 jobLabel: [selenium-testng, hybrid]
