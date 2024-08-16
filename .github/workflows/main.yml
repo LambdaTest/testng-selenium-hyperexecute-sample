@@ -35,8 +35,8 @@ jobs:
           echo "STEP 2) Download CLI and setting environment variables"
           cd testng-selenium-hyperexecute-sample
           curl https://downloads.lambdatest.com/hyperexecute/windows/hyperexecute.exe -o hyperexecute.exe
-          export LT_USERNAME=${{ github.event.inputs.username }}
-          export LT_ACCESS_KEY=${{ github.event.inputs.accessKey }}
+          export LT_USERNAME=shubhamr
+          export LT_ACCESS_KEY=dl8Y8as59i1YyGZZUeLF897aCFvIDmaKkUU1e6RgBmlgMLIIhh
           echo $LT_USERNAME
           echo $LT_ACCESS_KEY
           ./hyperexecute --user $LT_USERNAME --key $LT_ACCESS_KEY --config yaml/win/testng_hyperexecute_autosplit_sample.yaml --download-artifacts --download-report
