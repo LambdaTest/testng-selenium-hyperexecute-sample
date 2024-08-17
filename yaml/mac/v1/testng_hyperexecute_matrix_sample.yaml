@@ -1,0 +1,21 @@
+---
+version: 0.1
+runson: ${matrix.os}
+
+matrix:
+  tests: ["Test_1", "Test_2"]
+  browser: ["Chrome"]
+  os: ["mac"]
+
+pre:
+  - mvn dependency:resolve
+
+testSuites:
+  - mvn test -Dplatname=mac -Dmaven.repo.local=m2_cache_dir -DselectedTests=$tests
+
+parallelism: 1
+
+retryOnFailure: true
+maxRetries: 1
+
+jobLabel: [selenium-testng, mac, matrix]

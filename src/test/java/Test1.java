@@ -1,4 +1,3 @@
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -40,6 +39,11 @@ public class Test1
         capabilities.setCapability("network",true);
         capabilities.setCapability("console",true);
         capabilities.setCapability("visual",true);
+
+        capabilities.setCapability("accessibility", true); // Enable accessibility testing
+        capabilities.setCapability("accessibility.wcagVersion", "wcag21a"); // Specify WCAG version (e.g., WCAG 2.1 Level A)
+        capabilities.setCapability("accessibility.bestPractice", false); // Exclude best practice issues from results
+        capabilities.setCapability("accessibility.needsReview", true); // Include issues that need review
 
         try
         {
