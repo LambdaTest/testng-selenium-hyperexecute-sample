@@ -1,0 +1,21 @@
+---
+version: 0.2
+runson: mac
+
+autosplit: true
+concurrency: 4
+
+pre:
+  - mvn dependency:resolve
+
+framework:
+  name: maven/testng
+  defaultReports: false
+  flags:
+    - "-Dplatname=mac"
+    - "--file=pom02.xml"
+
+retryOnFailure: true
+maxRetries: 1
+
+jobLabel: [selenium-testng, mac, v2, autosplit]

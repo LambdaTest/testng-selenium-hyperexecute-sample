@@ -4,11 +4,9 @@ testSuiteTimeout: 150
 testSuiteStep: 150
 
 runson: ${matrix.os}
-retryOnFailure: false
 autosplit: true
-maxRetries: 1
+concurrency: 4
 parallelism: 1
-concurrency: 3
 
 matrix:
   os: [mac, win, linux]
@@ -33,13 +31,19 @@ testDiscovery:
       grep 'test name' xml/testng_linux.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
 
 pre:
-  - mvn -Dmaven.test.skip=true clean install
+  - mvn dependency:resolve
+
+linuxTestRunnerCommand: mvn test -Dplatname=linux -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$test
+winTestRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=./.m2 dependency:resolve `-DselectedTests=$test
+macTestRunnerCommand: mvn test -Dplatname=mac dependency:resolve -DselectedTests=$test
+
+retryOnFailure: true
+maxRetries: 1
 
 post:
-    - cat yaml/testng_hyperexecute_hybrid_sample.yaml
+  - cat yaml/testng_hyperexecute_hybrid_sample.yaml
 
 mergeArtifacts: true
- 
 uploadArtefacts:
   - name: XmlReports
     path:
@@ -50,9 +54,5 @@ partialReports:
   location: target/surefire-reports/html
   type: html
   frameworkName: extent
-
-linuxTestRunnerCommand: mvn test -Dplatname=linux -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$test
-winTestRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=./.m2 dependency:resolve `-DselectedTests=$test
-macTestRunnerCommand: mvn test -Dplatname=mac dependency:resolve -DselectedTests=$test
 
 jobLabel: [selenium-testng, hybrid]

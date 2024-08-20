@@ -1,0 +1,21 @@
+---
+version: 0.2
+runson: win
+
+autosplit: true
+concurrency: 4
+
+pre:
+  - mvn dependency:resolve
+
+framework:
+  name: maven/testng
+  defaultReports: false
+  flags:
+    - "-Dplatname=win"
+    - "--file=pom02.xml"
+
+retryOnFailure: true
+maxRetries: 1
+
+jobLabel: [selenium-testng, win, v2, autosplit]

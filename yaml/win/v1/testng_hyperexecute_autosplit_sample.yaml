@@ -1,39 +1,12 @@
 ---
 version: 0.1
-globalTimeout: 150
-testSuiteTimeout: 150
-testSuiteStep: 150
-
 runson: win
 
 autosplit: true
-retryOnFailure: true
-
-maxRetries: 5
 concurrency: 4
 
-env:
-  # PAT: ${{ .secrets.testKey }}
-  CACHE_DIR: m2_cache_dir
-
-cacheKey: '{{ checksum "pom.xml" }}'
-cacheDirectories:
-  - .m2
-
 pre:
-  # Download and install packages in the CACHE_DIR.
-  # Skip execution of the tests in the pre step
-  - mvn -Dmaven.repo.local=./.m2 dependency:resolve
-
-post:
-  - cat yaml/win/v1/testng_hyperexecute_autosplit_sample.yaml
-
-mergeArtifacts: true
-
-uploadArtefacts:
- - name: ExecutionSnapshots
-   path:
-    - target/surefire-reports/html/**
+  - mvn dependency:resolve
 
 testDiscovery:
   type: raw
@@ -42,10 +15,7 @@ testDiscovery:
 
 testRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=./.m2 dependency:resolve `-DselectedTests=$test
 
-report: true
-partialReports:
-  location: target/surefire-reports/html
-  type: html
-  frameworkName: extent
+retryOnFailure: true
+maxRetries: 1
 
 jobLabel: [selenium-testng, win, v1, autosplit]

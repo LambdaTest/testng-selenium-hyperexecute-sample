@@ -1,0 +1,21 @@
+---
+version: 0.2
+runson: linux
+
+autosplit: true
+concurrency: 4
+
+pre:
+  - mvn dependency:resolve
+
+framework:
+  name: maven/testng
+  defaultReports: false
+  flags:
+    - "-Dplatname=linux"
+    - "--file=pom02.xml"
+
+retryOnFailure: true
+maxRetries: 1
+
+jobLabel: [selenium-testng, linux, v2, autosplit]

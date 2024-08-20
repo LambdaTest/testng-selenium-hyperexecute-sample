@@ -1,0 +1,22 @@
+---
+version: 0.1
+runson: win11
+
+matrix:
+  tests: ["Test_1", "Test_2"]
+  browser: ["Chrome", "MicrosoftEdge"]
+  version: ["latest"]
+  os: ["win"]
+
+pre:
+  - mvn dependency:resolve
+
+testSuites:
+  - mvn test `-Dplatname=win `-Dmaven.repo.local=m2_cache_dir `-DselectedTests=$tests
+
+parallelism: 1
+
+retryOnFailure: true
+maxRetries: 1
+
+jobLabel: [selenium-testng, win11, matrix]
