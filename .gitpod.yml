@@ -12,5 +12,5 @@ tasks:
       
     init: |
       echo "Performing test"
-      ./hyperexecute --user=$LT_USERNAME --key=$LT_ACCESS_KEY --config yaml/win/testng_hyperexecute_autosplit_sample.yaml --download-artifacts --force-clean-artifacts
+      ./hyperexecute --user=$LT_USERNAME --key=$LT_ACCESS_KEY --config yaml/win/v2/testng_hyperexecute_autosplit_sample.yaml --download-artifacts --force-clean-artifacts
       echo "Test completion"
