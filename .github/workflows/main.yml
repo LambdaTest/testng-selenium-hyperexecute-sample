@@ -1,4 +1,4 @@
-name: Github Actions
+name: HyperExecute-Selenium-TestNG
 on:
   workflow_dispatch:
     inputs:
@@ -14,7 +14,7 @@ on:
         required: true
 
 jobs:
-  HyperExecute-Selenium:
+  HyperExecute-Selenium-TestNG:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 15
     strategy:
