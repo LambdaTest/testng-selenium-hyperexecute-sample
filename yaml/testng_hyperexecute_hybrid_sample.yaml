@@ -19,8 +19,7 @@ cacheDirectories:
   - ${CACHE_DIR}
 
 testDiscovery:
-    type: raw
-    mode: dynamic
+    mode: remote
     command: |
       grep 'test name' xml/testng_win11.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
     macCommand: |

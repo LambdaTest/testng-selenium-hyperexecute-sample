@@ -9,11 +9,10 @@ pre:
   - mvn dependency:resolve
 
 testDiscovery:
-  type: raw
-  mode: dynamic
+  mode: remote
   command: grep 'test name' xml/testng_mac.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/>//g'
 
-testRunnerCommand: mvn test -Dplatname=mac dependency:resolve -DselectedTests=$test
+testRunnerCommand: mvn test -Dplatname=mac -DselectedTests=$test
 
 retryOnFailure: true
 maxRetries: 1
