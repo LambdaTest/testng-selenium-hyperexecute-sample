@@ -9,8 +9,7 @@ pre:
   - mvn dependency:resolve
 
 testDiscovery:
-  type: raw
-  mode: dynamic
+  mode: remote
   command: grep 'test name' xml/testng_win.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
 
 testRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=./.m2 dependency:resolve `-DselectedTests=$test
