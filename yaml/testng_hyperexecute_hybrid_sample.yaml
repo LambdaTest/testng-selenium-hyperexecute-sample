@@ -11,12 +11,9 @@ parallelism: 1
 matrix:
   os: [mac, win, linux]
 
-env:
-  CACHE_DIR: m2_cache_dir
-
 cacheKey: '{{ checksum "pom.xml" }}'
 cacheDirectories:
-  - ${CACHE_DIR}
+  - .m2
 
 testDiscovery:
     mode: remote
@@ -30,11 +27,11 @@ testDiscovery:
       grep 'test name' xml/testng_linux.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
 
 pre:
-  - mvn dependency:resolve
+  - mvn -Dmaven.repo.local=./.m2 dependency:resolve
 
-linuxTestRunnerCommand: mvn test -Dplatname=linux -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$test
-winTestRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=./.m2 dependency:resolve `-DselectedTests=$test
-macTestRunnerCommand: mvn test -Dplatname=mac dependency:resolve -DselectedTests=$test
+linuxTestRunnerCommand: mvn test -Dplatname=linux -Dmaven.repo.local=./.m2 -DselectedTests=$test
+winTestRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=./.m2 `-DselectedTests=$test
+macTestRunnerCommand: mvn test -Dplatname=mac -Dmaven.repo.local=./.m2 -DselectedTests=$test
 
 retryOnFailure: true
 maxRetries: 1
