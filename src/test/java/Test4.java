@@ -40,11 +40,6 @@ public class Test4
         capabilities.setCapability("console",true);
         capabilities.setCapability("visual",true);
 
-        capabilities.setCapability("accessibility", true); // Enable accessibility testing
-        capabilities.setCapability("accessibility.wcagVersion", "wcag21a"); // Specify WCAG version (e.g., WCAG 2.1 Level A)
-        capabilities.setCapability("accessibility.bestPractice", false); // Exclude best practice issues from results
-        capabilities.setCapability("accessibility.needsReview", true); // Include issues that need review
-
         try
         {
             driver = new RemoteWebDriver(new URL("https://" + username + ":" + access_key + "@hub.lambdatest.com/wd/hub"), capabilities);

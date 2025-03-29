@@ -3,15 +3,16 @@ version: 0.1
 runson: ${matrix.os}
 
 matrix:
-  tests: ["Test_1", "Test_2"]
-  browser: ["Chrome"]
+  tests: ["Test_1", "Test_2", "Test_3", "Test_4"]
+  browser: ["Chrome", "MicrosoftEdge", "Firefox", "Safari"]
+  version: ["latest"]
   os: ["mac"]
 
 pre:
   - mvn dependency:resolve
 
 testSuites:
-  - mvn test -Dplatname=mac -Dmaven.repo.local=m2_cache_dir -DselectedTests=$tests
+  - mvn test -Dplatname=mac -Dmaven.repo.local=m2_cache_dir -DselectedTests=$tests -Dbrowser=$browser
 
 parallelism: 1
 

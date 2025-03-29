@@ -34,7 +34,7 @@
 			</classes>
 	</test>
 	<test name="Test_4">
-			<parameter name="browser" value="MicrosoftEdge"/>
+			<parameter name="browser" value="Chrome"/>
 			<parameter name="version" value="latest"/>
 			<parameter name="platform" value="Windows 10"/>
 			<parameter name="resolution" value="1024x768"/>
