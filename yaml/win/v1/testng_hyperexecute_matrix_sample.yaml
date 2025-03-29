@@ -3,8 +3,8 @@ version: 0.1
 runson: win
 
 matrix:
-  tests: ["Test_1", "Test_2"]
-  browser: ["Chrome", "MicrosoftEdge"]
+  tests: ["Test_1", "Test_2", "Test_3", "Test_4"]
+  browser: ["Chrome", "MicrosoftEdge", "Firefox"]
   version: ["latest"]
   os: ["win"]
 
@@ -12,7 +12,7 @@ pre:
   - mvn dependency:resolve
 
 testSuites:
-  - mvn test `-Dplatname=win `-Dmaven.repo.local=m2_cache_dir `-DselectedTests=$tests
+  - mvn test `-Dplatname=win `-Dmaven.repo.local=m2_cache_dir `-DselectedTests=$tests -Dbrowser=$browser
 
 parallelism: 1
 

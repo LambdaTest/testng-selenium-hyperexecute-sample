@@ -33,9 +33,9 @@ testDiscovery:
 pre:
   - mvn dependency:resolve
 
-linuxTestRunnerCommand: mvn test -Dplatname=linux -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$test
-winTestRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=./.m2 dependency:resolve `-DselectedTests=$test
-macTestRunnerCommand: mvn test -Dplatname=mac dependency:resolve -DselectedTests=$test
+linuxTestRunnerCommand: mvn test -Dplatname=linux -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$test -Dbrowser=$browser
+winTestRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=./.m2 dependency:resolve `-DselectedTests=$test -Dbrowser=$browser
+macTestRunnerCommand: mvn test -Dplatname=mac dependency:resolve -DselectedTests=$test -Dbrowser=$browser
 
 retryOnFailure: true
 maxRetries: 1

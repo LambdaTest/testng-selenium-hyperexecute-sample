@@ -25,7 +25,7 @@
 			</classes>
 	</test>
 	<test name="Test_3">
-			<parameter name="browser" value="MicrosoftEdge"/>
+			<parameter name="browser" value="Firefox"/>
 			<parameter name="version" value="latest"/>
 			<parameter name="platform" value="LINUX"/>
 			<parameter name="resolution" value="1024x768"/>
