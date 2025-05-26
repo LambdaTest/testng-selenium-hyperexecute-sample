@@ -1,0 +1,20 @@
+---
+version: 0.1
+runson: linux
+
+autosplit: true
+concurrency: 500
+
+
+testDiscovery:
+  type: raw
+  mode: remote
+  command: cat remote.txt
+
+testRunnerCommand: mvn test -Dplatname=linux -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$test
+
+report: true
+retryOnFailure: true
+maxRetries: 1
+
+jobLabel: [selenium-testng, linux, v1, autosplit, remote]
