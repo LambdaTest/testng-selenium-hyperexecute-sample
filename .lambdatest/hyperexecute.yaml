@@ -1,0 +1,22 @@
+---
+version: 0.1
+runson: ${matrix.os}
+
+matrix:
+  tests: ["Test_1", "Test_2"]
+  browser: ["Chrome", "MicrosoftEdge"]
+  version: ["latest"]
+  os: ["linux"]
+
+pre:
+  - mvn dependency:resolve
+
+testSuites:
+  - mvn test -Dplatname=linux -Dmaven.repo.local=m2_cache_dir -DselectedTests=$tests
+
+parallelism: 1
+
+retryOnFailure: true
+maxRetries: 1
+
+jobLabel: [selenium-testng, linux, matrix]
