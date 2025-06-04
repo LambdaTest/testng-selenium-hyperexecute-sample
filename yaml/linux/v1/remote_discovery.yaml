@@ -1,0 +1,20 @@
+---
+version: 0.1
+runson: linux
+
+autosplit: true
+concurrency: 500
+
+
+testDiscovery:
+  type: raw
+  mode: remote
+  command: grep 'test name' xml/testng_linux.xml | awk '{print $2}' | sed 's/name=//g' | sed 's/>//g' | sed 's/^[ \t]*//' | head -n 1
+
+testRunnerCommand: mvn test -Dplatname=linux -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$test
+
+report: true
+retryOnFailure: true
+maxRetries: 1
+
+jobLabel: [selenium-testng, linux, v1, autosplit, remote]
