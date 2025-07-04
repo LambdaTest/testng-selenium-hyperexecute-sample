@@ -1,15 +1,21 @@
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.*;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.JsonFormatter;
+
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.time.Duration;
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Test1
 {
@@ -17,6 +23,10 @@ public class Test1
     public static String status = "passed";
     public static String username = System.getenv("LT_USERNAME");
     public static String access_key = System.getenv("LT_ACCESS_KEY");
+
+    ExtentSparkReporter spark = new ExtentSparkReporter("target/surefire-reports/html/extentReport.html");
+    JsonFormatter json = new JsonFormatter("target/surefire-reports/json/Extent_Report.json");
+    ExtentReports extent = new ExtentReports();
 
 //    String testURL = "https://todomvc.com/examples/react/#/";
     String testURL = "https://lambdatest.github.io/sample-todo-app/";
@@ -61,15 +71,15 @@ public class Test1
     @Test(description="To Do App on React App")
     public void test1_element_addition_1() throws InterruptedException
     {
-        ExtentReports extent = new ExtentReports("target/surefire-reports/html/extentReport.html");
-        ExtentTest test1 = extent.startTest("demo application test 1-1", "To Do App test 1");
+        extent.attachReporter(json, spark);
+        ExtentTest test1 = extent.createTest("demo application test 1-1", "To Do App test 1");
 
         driver.get(testURL);
         Thread.sleep(5000);
 
-        test1.log(LogStatus.PASS, "URL is opened");
+        test1.log(Status.PASS, "URL is opened");
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        test1.log(LogStatus.PASS, "Wait created");
+        test1.log(Status.PASS, "Wait created");
 
         By textField = By.id("sampletodotext");
 
@@ -80,7 +90,7 @@ public class Test1
         for (int i = 1; i <= item_count; i++) {
             addText.click();
             addText.sendKeys("Adding a new item " + i + Keys.ENTER);
-            test1.log(LogStatus.PASS, "New item No. " + i + " is added");
+            test1.log(Status.PASS, "New item No. " + i + " is added");
             Thread.sleep(2000);
         }
 
@@ -95,38 +105,37 @@ public class Test1
 
             driver.findElement(By.xpath(xpath)).click();
             Thread.sleep(500);
-            test1.log(LogStatus.PASS, "Item No. " + i + " marked completed");
+            test1.log(Status.PASS, "Item No. " + i + " marked completed");
             By remainingItem = By.className("ng-binding");
             String actualText = driver.findElement(remainingItem).getText();
             String expectedText = remaining+" of "+totalCount+" remaining";
 
             if (!expectedText.equals(actualText)) {
-                test1.log(LogStatus.FAIL, "Wrong Text Description");
+                test1.log(Status.FAIL, "Wrong Text Description");
                 status = "failed";
             }
             Thread.sleep(500);
 
-            test1.log(LogStatus.PASS, "Item No. " + i + " completed");
+            String base64Screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
+            test1.log(Status.PASS, "Item No. " + i + " completed", MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot, "sp-test").build());
         }
 
-        extent.endTest(test1);
         extent.flush();
 
         /* Once you are outside this code, the list would be empty */
     }
 
     @Test(description="To Do App on React App")
-    public void test1_element_addition_2() throws InterruptedException
+    public void test1_element_addition_2() throws InterruptedException, IOException
     {
-        ExtentReports extent = new ExtentReports("target/surefire-reports/html/extentReport.html");
-        ExtentTest test2 = extent.startTest("demo application test 1-2", "To Do App test 2");
+        ExtentTest test2 = extent.createTest("demo application test 1-2", "To Do App test 2");
 
         driver.get(testURL);
         Thread.sleep(5000);
 
-        test2.log(LogStatus.PASS, "URL is opened");
+        test2.log(Status.PASS, "URL is opened");
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        test2.log(LogStatus.PASS, "Wait created");
+        test2.log(Status.PASS, "Wait created");
 
         By textField = By.id("sampletodotext");
 
@@ -137,7 +146,7 @@ public class Test1
         for (int i = 1; i <= item_count; i++) {
             addText.click();
             addText.sendKeys("Adding a new item " + i + Keys.ENTER);
-            test2.log(LogStatus.PASS, "New item No. " + i + " is added");
+            test2.log(Status.PASS, "New item No. " + i + " is added");
             Thread.sleep(2000);
         }
 
@@ -152,21 +161,24 @@ public class Test1
 
             driver.findElement(By.xpath(xpath)).click();
             Thread.sleep(500);
-            test2.log(LogStatus.PASS, "Item No. " + i + " marked completed");
+            test2.log(Status.PASS, "Item No. " + i + " marked completed");
             By remainingItem = By.className("ng-binding");
             String actualText = driver.findElement(remainingItem).getText();
             String expectedText = remaining+" of "+totalCount+" remaining";
 
             if (!expectedText.equals(actualText)) {
-                test2.log(LogStatus.FAIL, "Wrong Text Description");
+                test2.log(Status.FAIL, "Wrong Text Description");
                 status = "failed";
             }
             Thread.sleep(500);
 
-            test2.log(LogStatus.PASS, "Item No. " + i + " completed");
+            File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            File destFile = new File("target/surefire-reports/json/screenshot.png");
+            // Copy the screenshot to destination
+            FileUtils.copyFile(srcFile, destFile);
+            test2.log(Status.PASS, "Item No. " + i + " completed", MediaEntityBuilder.createScreenCaptureFromPath(destFile.getAbsolutePath(), "sp-test").build());
         }
 
-        extent.endTest(test2);
         extent.flush();
 
         /* Once you are outside this code, the list would be empty */
@@ -177,7 +189,7 @@ public class Test1
     {
         if (driver != null)
         {
-            ((JavascriptExecutor) driver).executeScript("lambda-status=" + status);
+            ((JavascriptExecutor) driver).executeScript("lambda-status=failed");
             driver.quit();
         }
     }

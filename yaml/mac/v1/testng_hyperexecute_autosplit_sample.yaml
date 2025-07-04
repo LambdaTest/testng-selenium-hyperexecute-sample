@@ -5,15 +5,23 @@ runson: mac
 autosplit: true
 concurrency: 4
 
+runtime:
+  language: java
+  version: 11
+
+cacheKey: '{{ checksum "pom.xml" }}'
+cacheDirectories:
+  - .m2
+
 pre:
-  - mvn dependency:resolve
+  - mvn -Dmaven.repo.local=./.m2 dependency:resolve
 
 testDiscovery:
   type: raw
   mode: dynamic
   command: grep 'test name' xml/testng_mac.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/>//g'
 
-testRunnerCommand: mvn test -Dplatname=mac dependency:resolve -DselectedTests=$test
+testRunnerCommand: mvn test -Dplatname=mac -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$test
 
 retryOnFailure: true
 maxRetries: 1

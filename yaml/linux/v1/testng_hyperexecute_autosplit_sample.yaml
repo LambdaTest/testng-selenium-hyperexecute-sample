@@ -5,8 +5,16 @@ runson: linux
 autosplit: true
 concurrency: 4
 
+runtime:
+  language: java
+  version: 11
+
+cacheKey: '{{ checksum "pom.xml" }}'
+cacheDirectories:
+  - .m2
+
 pre:
-  - mvn dependency:resolve
+  - mvn -Dmaven.repo.local=./.m2 dependency:resolve
 
 testDiscovery:
   type: raw
