@@ -12,11 +12,15 @@ matrix:
   os: [mac, win, linux]
 
 env:
-  CACHE_DIR: m2_cache_dir
+  CACHE_DIR: m2
 
 cacheKey: '{{ checksum "pom.xml" }}'
 cacheDirectories:
   - ${CACHE_DIR}
+
+runtime:
+  language: java
+  version: 11
 
 testDiscovery:
     type: raw
@@ -31,11 +35,11 @@ testDiscovery:
       grep 'test name' xml/testng_linux.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
 
 pre:
-  - mvn dependency:resolve
+  - mvn -Dmaven.repo.local=./.m2 dependency:resolve
 
 linuxTestRunnerCommand: mvn test -Dplatname=linux -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$test
 winTestRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=./.m2 dependency:resolve `-DselectedTests=$test
-macTestRunnerCommand: mvn test -Dplatname=mac dependency:resolve -DselectedTests=$test
+macTestRunnerCommand: mvn test -Dplatname=mac -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$test
 
 retryOnFailure: true
 maxRetries: 1

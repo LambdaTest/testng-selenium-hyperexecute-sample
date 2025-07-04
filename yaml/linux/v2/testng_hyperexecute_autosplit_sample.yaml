@@ -5,6 +5,10 @@ runson: linux
 autosplit: true
 concurrency: 4
 
+runtime:
+  language: java
+  version: 11
+
 pre:
   - mvn dependency:resolve
 

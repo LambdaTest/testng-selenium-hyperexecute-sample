@@ -8,11 +8,19 @@ matrix:
   version: ["latest"]
   os: ["win"]
 
+runtime:
+  language: java
+  version: 11
+
+cacheKey: '{{ checksum "pom.xml" }}'
+cacheDirectories:
+  - .m2
+
 pre:
-  - mvn dependency:resolve
+  - mvn -Dmaven.repo.local=./.m2 dependency:resolve
 
 testSuites:
-  - mvn test `-Dplatname=win `-Dmaven.repo.local=m2_cache_dir `-DselectedTests=$tests
+  - mvn test `-Dplatname=win `-Dmaven.repo.local=./.m2 `-DselectedTests=$tests
 
 parallelism: 1
 

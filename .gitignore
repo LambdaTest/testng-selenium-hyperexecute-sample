@@ -7,7 +7,10 @@ logs/
 nucleus.log
 artifacts
 .idea/
-.mvn/
 target/
 hyperexecute-cli.log
 test-output/
+.m2
+hyperexecute
+hyperexecuteupdate
+hyperexecute-cli-*
