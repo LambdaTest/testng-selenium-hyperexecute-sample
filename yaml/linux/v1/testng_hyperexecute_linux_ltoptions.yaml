@@ -37,4 +37,4 @@ ltOptions:
   version: latest
   video: false
 
-jobLabel: [selenium-testng, linux, v1, autosplit]
+jobLabel: [selenium-testng, linux, ltOptionsYamlDirective]
