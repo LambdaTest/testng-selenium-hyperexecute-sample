@@ -38,7 +38,7 @@ public class Test3
         capabilities.setCapability("build", "[HyperExecute - 3] Demonstration of the TestNG Framework");
         capabilities.setCapability("name", "[HyperExecute - 3] Demonstration of the TestNG Framework");
 
-        capabilities.setCapability("platform", System.getenv("HYPEREXECUTE_PLATFORM"));
+        capabilities.setCapability("platform", platformName);
         capabilities.setCapability("browserName", browser);
         capabilities.setCapability("version",version);
 
