@@ -4,7 +4,9 @@ runson: linux
 
 autosplit: true
 concurrency: 500
-
+runtime:
+  language: java
+  version: 11
 
 testDiscovery:
   type: raw
