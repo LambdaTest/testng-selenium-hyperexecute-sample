@@ -189,7 +189,7 @@ public class Test1
     {
         if (driver != null)
         {
-            ((JavascriptExecutor) driver).executeScript("lambda-status=failed" + status);
+            ((JavascriptExecutor) driver).executeScript("lambda-status=" + status);
             driver.quit();
         }
     }
