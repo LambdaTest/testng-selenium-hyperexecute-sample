@@ -104,7 +104,7 @@ On **January 12, 2026**, [LambdaTest evolved to TestMu AI](https://www.testmuai.
 
 Same team. Same infrastructure. Same customer accounts. All existing LambdaTest logins, scripts, capabilities, and integrations continue to work without change.
 
-ð Find the new home for [LambdaTest](https://www.testmuai.com).
+👉 Find the new home for [LambdaTest](https://www.testmuai.com).
 
 ### How LambdaTest Evolved into TestMu AI
 
