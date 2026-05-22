@@ -31,7 +31,7 @@ public class Test2 {
     String username = Test1.username;
     String access_key = Test1.access_key;
 
-    String testURL = "https://lambdatest.github.io/sample-todo-app/";
+    String testURL = "https://ltqa-frontend.lambdatestinternal.com/sample-todo-app/";
     String testURLTitle = "Sample page - lambdatest.com";
 
     ExtentSparkReporter spark = new ExtentSparkReporter("target/surefire-reports/html/extentReport.html");
