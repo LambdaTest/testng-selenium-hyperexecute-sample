@@ -135,9 +135,9 @@ public class Test1 {
             driver.findElement(By.xpath(xpath)).click();
             Thread.sleep(500);
             test1.log(Status.PASS, "Item No. " + i + " marked completed");
-            By remainingItem = By.xpath("//span[contains(text(),'tasks remaining')]");
+            By remainingItem = By.cssSelector("[data-testid='remaining-count']");
             String actualText = driver.findElement(remainingItem).getText();
-            String expectedText = remaining + " of " + totalCount + " tasks remaining";
+            String expectedText = remaining + " of " + totalCount + " remaining";
 
             if (!actualText.contains(expectedText)) {
                 test1.log(Status.FAIL, "Wrong Text Description");
@@ -192,9 +192,9 @@ public class Test1 {
             driver.findElement(By.xpath(xpath)).click();
             Thread.sleep(500);
             test2.log(Status.PASS, "Item No. " + i + " marked completed");
-            By remainingItem = By.xpath("//span[contains(text(),'tasks remaining')]");
+            By remainingItem = By.cssSelector("[data-testid='remaining-count']");
             String actualText = driver.findElement(remainingItem).getText();
-            String expectedText = remaining + " of " + totalCount + " tasks remaining";
+            String expectedText = remaining + " of " + totalCount + " remaining";
 
             if (!actualText.contains(expectedText)) {
                 test2.log(Status.FAIL, "Wrong Text Description");
