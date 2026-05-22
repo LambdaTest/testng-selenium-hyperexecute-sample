@@ -41,7 +41,7 @@ public class Test1 {
     ExtentReports extent = new ExtentReports();
 
     // String testURL = "https://todomvc.com/examples/react/#/";
-    String testURL = "https://lambdatest.github.io/sample-todo-app/";
+    String testURL = "https://ltqa-frontend.lambdatestinternal.com/sample-todo-app/";
     String testURLTitle = "Sample page - lambdatest.com";
 
     @BeforeMethod
