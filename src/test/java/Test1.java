@@ -135,7 +135,7 @@ public class Test1 {
             driver.findElement(By.xpath(xpath)).click();
             Thread.sleep(500);
             test1.log(Status.PASS, "Item No. " + i + " marked completed");
-            By remainingItem = By.className("ng-binding");
+            By remainingItem = By.xpath("//span[contains(text(),'tasks remaining')]");
             String actualText = driver.findElement(remainingItem).getText();
             String expectedText = remaining + " of " + totalCount + " tasks remaining";
 
@@ -192,7 +192,7 @@ public class Test1 {
             driver.findElement(By.xpath(xpath)).click();
             Thread.sleep(500);
             test2.log(Status.PASS, "Item No. " + i + " marked completed");
-            By remainingItem = By.className("ng-binding");
+            By remainingItem = By.xpath("//span[contains(text(),'tasks remaining')]");
             String actualText = driver.findElement(remainingItem).getText();
             String expectedText = remaining + " of " + totalCount + " tasks remaining";
 
