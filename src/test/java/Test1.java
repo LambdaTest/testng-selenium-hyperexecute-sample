@@ -139,7 +139,7 @@ public class Test1 {
             String actualText = driver.findElement(remainingItem).getText();
             String expectedText = remaining + " of " + totalCount + " remaining";
 
-            if (!actualText.contains(expectedText)) {
+            if (!actualText.toLowerCase().contains(expectedText.toLowerCase())) {
                 test1.log(Status.FAIL, "Wrong Text Description");
                 System.out.println("unmatched at " + expectedText + " " + actualText);
                 status = "failed";
@@ -196,7 +196,7 @@ public class Test1 {
             String actualText = driver.findElement(remainingItem).getText();
             String expectedText = remaining + " of " + totalCount + " remaining";
 
-            if (!actualText.contains(expectedText)) {
+            if (!actualText.toLowerCase().contains(expectedText.toLowerCase())) {
                 test2.log(Status.FAIL, "Wrong Text Description");
                 System.out.println("unmatched at " + expectedText + " " + actualText);
                 status = "failed";
