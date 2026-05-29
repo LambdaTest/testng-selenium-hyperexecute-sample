@@ -50,7 +50,7 @@ public class Test1
     public static String username = System.getenv("LT_USERNAME");
     public static String access_key = System.getenv("LT_ACCESS_KEY");
 
-    String testURL = "https://lambdatest.github.io/sample-todo-app/";
+    String testURL = "https://ltqa-frontend.lambdatestinternal.com/sample-todo-app/";
     String testURLTitle = "Sample page - lambdatest.com";
     @BeforeMethod
     public void testSetUp() throws Exception
@@ -103,11 +103,11 @@ public class Test1
             driver.findElement(By.xpath(xpath)).click();
             Thread.sleep(500);
             test1.log(LogStatus.PASS, "Item No. " + i + " marked completed");
-            By remainingItem = By.className("ng-binding");
+            By remainingItem = By.cssSelector("[data-testid='remaining-count']");
             String actualText = driver.findElement(remainingItem).getText();
-            String expectedText = remaining+" of "+totalCount+" tasks remaining";
+            String expectedText = remaining+" of "+totalCount+" remaining";
 
-            if (!actualText.contains(expectedText)) {
+            if (!actualText.toLowerCase().contains(expectedText.toLowerCase())) {
                 test1.log(LogStatus.FAIL, "Wrong Text Description");
                 status = "failed";
             }
