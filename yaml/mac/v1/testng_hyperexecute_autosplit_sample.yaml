@@ -18,7 +18,7 @@ pre:
 
 testDiscovery:
   type: raw
-  mode: dynamic
+  mode: remote
   command: grep 'test name' xml/testng_mac.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/>//g'
 
 testRunnerCommand: mvn test -Dplatname=mac -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$test
