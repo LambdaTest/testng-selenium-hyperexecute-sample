@@ -57,7 +57,7 @@ public class Test1
     {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         System.out.println("Started session");
     }
@@ -74,7 +74,7 @@ public class Test1
       //  Thread.sleep(8*60*1000);
         //add
         /* Selenium Java 3.141.59 */
-        WebDriverWait wait = new WebDriverWait(driver, 5);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         /* WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); */
         test1.log(LogStatus.PASS, "Wait created");
         /* Click on the Link */
