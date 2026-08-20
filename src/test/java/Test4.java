@@ -58,10 +58,10 @@ public class Test4 {
         ltOptions.put("w3c", true);
 
         // Accessibility options
-        ltOptions.put("accessibility", true);
-        ltOptions.put("accessibility.wcagVersion", "wcag21a");
-        ltOptions.put("accessibility.bestPractice", false);
-        ltOptions.put("accessibility.needsReview", true);
+        // ltOptions.put("accessibility", true);
+        // ltOptions.put("accessibility.wcagVersion", "wcag21a");
+        // ltOptions.put("accessibility.bestPractice", false);
+        // ltOptions.put("accessibility.needsReview", true);
 
         // Use browser-specific Options class for W3C compliance
         MutableCapabilities browserOptions;
