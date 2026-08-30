@@ -1,0 +1,32 @@
+---
+version: 0.1
+runson: ${matrix.os}
+
+onpremEnv: ocp-pre-prod
+
+matrix:
+  tests: ["Test_1"]
+  browser: ["Chrome"]
+  version: ["latest"]
+  os: ["linux"]
+
+runtime:
+  language: java
+  version: 11
+
+cacheKey: '{{ checksum "pom.xml" }}'
+cacheDirectories:
+  - .m2
+
+pre:
+  - mvn -Dmaven.repo.local=./.m2 dependency:resolve
+
+testSuites:
+  - mvn test -Dplatname=linux -Dmaven.repo.local=./.m2 -DselectedTests=$tests
+
+parallelism: 1
+
+retryOnFailure: true
+maxRetries: 1
+
+jobLabel: [selenium-testng, linux, matrix, ocp-pre-prod]
