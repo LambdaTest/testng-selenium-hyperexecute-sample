@@ -28,3 +28,34 @@ retryOnFailure: true
 maxRetries: 1
 
 jobLabel: [selenium-testng, linux, matrix]
+
+mergeArtifacts: true
+
+uploadArtefacts:
+ - name: ExecutionSnapshots
+   path:
+    - target/surefire-reports/html/**
+
+globalPost:
+  mode: remote
+  commands:
+    - "ls"
+    - "printenv"
+    - "ls .."
+    - ls -R hyperexecute | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|/'
+    - echo ${ARTIFACTS_DIR}
+    - echo ${ARTIFACTS_MANIFEST}
+    - echo ${UPLOAD_DIR}
+    - ls ${ARTIFACTS_DIR}
+    - cat ${ARTIFACTS_MANIFEST}
+    - mkdir -p ${UPLOAD_DIR}/uploadedArtifacts
+    - touch ${UPLOAD_DIR}/result.json
+    - mv ${ARTIFACTS_MANIFEST} ${UPLOAD_DIR}/uploadedArtifacts/
+    - shopt -s dotglob && mv ${ARTIFACTS_DIR}/* ${UPLOAD_DIR}
+    - ls ${UPLOAD_DIR}
+  runson: linux
+  downloadArtifacts: true
+  email:
+    to:
+      - ltqa@ltqa.lambdatestautomation.com
+    linkValidity: 5
