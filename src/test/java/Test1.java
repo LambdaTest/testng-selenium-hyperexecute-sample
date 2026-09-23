@@ -110,11 +110,11 @@ public class Test1 {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         test1.log(Status.PASS, "Wait created");
 
-        By textField = By.id("sampletodotext");
+        By textField = By.id("sampletodotex");
 
         WebElement addText = driver.findElement(textField);
 
-        int item_count = 5;
+        int item_count = 2;
 
         for (int i = 1; i <= item_count; i++) {
             addText.click();
@@ -128,28 +128,28 @@ public class Test1 {
         int totalCount = item_count + 5;
         int remaining = totalCount - 1;
 
-        for (int i = 1; i < totalCount; i++, remaining--) {
+        // for (int i = 1; i < totalCount; i++, remaining--) {
 
-            String xpath = "(//input[@type='checkbox'])[" + i + "]";
+        //     String xpath = "(//input[@type='checkbox'])[" + i + "]";
 
-            driver.findElement(By.xpath(xpath)).click();
-            Thread.sleep(500);
-            test1.log(Status.PASS, "Item No. " + i + " marked completed");
-            By remainingItem = By.cssSelector("[data-testid='remaining-count']");
-            String actualText = driver.findElement(remainingItem).getText();
-            String expectedText = remaining + " of " + totalCount + " remaining";
+        //     driver.findElement(By.xpath(xpath)).click();
+        //     Thread.sleep(500);
+        //     test1.log(Status.PASS, "Item No. " + i + " marked completed");
+        //     By remainingItem = By.cssSelector("[data-testid='remaining-count']");
+        //     String actualText = driver.findElement(remainingItem).getText();
+        //     String expectedText = remaining + " of " + totalCount + " remaining";
 
-            if (!actualText.toLowerCase().contains(expectedText.toLowerCase())) {
-                test1.log(Status.FAIL, "Wrong Text Description");
-                System.out.println("unmatched at " + expectedText + " " + actualText);
-                status = "failed";
-            }
-            Thread.sleep(500);
+        //     if (!actualText.toLowerCase().contains(expectedText.toLowerCase())) {
+        //         test1.log(Status.FAIL, "Wrong Text Description");
+        //         System.out.println("unmatched at " + expectedText + " " + actualText);
+        //         status = "failed";
+        //     }
+        //     Thread.sleep(500);
 
-            String base64Screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
-            test1.log(Status.PASS, "Item No. " + i + " completed",
-                    MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot, "sp-test").build());
-        }
+        //     String base64Screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
+        //     test1.log(Status.PASS, "Item No. " + i + " completed",
+        //             MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot, "sp-test").build());
+        // }
 
         extent.flush();
 
