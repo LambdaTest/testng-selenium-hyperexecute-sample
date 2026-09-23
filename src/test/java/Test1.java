@@ -110,7 +110,7 @@ public class Test1 {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         test1.log(Status.PASS, "Wait created");
 
-        By textField = By.id("sampletodotex");
+        By textField = By.id("sampletodotext");
 
         WebElement addText = driver.findElement(textField);
 
