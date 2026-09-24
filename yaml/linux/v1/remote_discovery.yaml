@@ -3,7 +3,7 @@ version: 0.1
 runson: linux
 
 autosplit: true
-concurrency: 500
+concurrency: 2
 runtime:
   language: java
   version: 11
