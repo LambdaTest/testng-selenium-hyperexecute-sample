@@ -3,7 +3,7 @@ version: 0.1
 runson: ${matrix.os}
 
 matrix:
-  tests: ["Test_1"]
+  tests: ["Test_1", "Test_2"]
   browser: ["Chrome"]
   version: ["latest"]
   os: ["linux"]
