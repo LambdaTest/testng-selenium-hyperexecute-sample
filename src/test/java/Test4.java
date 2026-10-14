@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,7 +31,7 @@ public class Test4 {
     String access_key = Test1.access_key;
 
     // String testURL = "https://todomvc.com/examples/react/#/";
-    String testURL = "https://ltqa-frontend.lambdatestinternal.com/sample-todo-app/";
+    String testURL = "https://www.testmuai.com/selenium-playground/todo-app/";
     String testURLTitle = "Sample page - lambdatest.com";
 
     ExtentSparkReporter spark = new ExtentSparkReporter("target/surefire-reports/html/extentReport.html");
@@ -80,6 +79,12 @@ public class Test4 {
                 browserOptions = new ChromeOptions();
         }
 
+        // Wells on-prem: route the browser through the corporate proxy so external sites load (no direct egress).
+        if (browserOptions instanceof ChromeOptions) {
+            ((ChromeOptions) browserOptions).addArguments("--proxy-server=http://proxy-nsp.wellsfargo.com:8080", "--ignore-ssl-errors", "--ignore-certificate-errors");
+        } else if (browserOptions instanceof EdgeOptions) {
+            ((EdgeOptions) browserOptions).addArguments("--proxy-server=http://proxy-nsp.wellsfargo.com:8080", "--ignore-ssl-errors", "--ignore-certificate-errors");
+        }
         browserOptions.setCapability("browserVersion", version);
         browserOptions.setCapability("platformName", platformName);
         browserOptions.setCapability("LT:Options", ltOptions);
@@ -112,7 +117,8 @@ public class Test4 {
 
         for (int i = 1; i <= item_count; i++) {
             addText.click();
-            addText.sendKeys("Adding a new item " + i + Keys.ENTER);
+            addText.sendKeys("Adding a new item " + i);
+            driver.findElement(By.id("addbutton")).click();
             test1.log(Status.PASS, "New item No. " + i + " is added");
             Thread.sleep(2000);
         }
@@ -129,9 +135,9 @@ public class Test4 {
             driver.findElement(By.xpath(xpath)).click();
             Thread.sleep(500);
             test1.log(Status.PASS, "Item No. " + i + " marked completed");
-            By remainingItem = By.cssSelector("[data-testid='remaining-count']");
+            By remainingItem = By.xpath("//span[contains(.,'tasks remaining')]");
             String actualText = driver.findElement(remainingItem).getText();
-            String expectedText = remaining + " of " + totalCount + " remaining";
+            String expectedText = remaining + " of " + totalCount + " tasks remaining";
 
             if (!actualText.toLowerCase().contains(expectedText.toLowerCase())) {
                 test1.log(Status.FAIL, "Wrong Text Description");
