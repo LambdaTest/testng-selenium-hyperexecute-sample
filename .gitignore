@@ -15,3 +15,7 @@ hyperexecute
 hyperexecuteupdate
 hyperexecute-cli-*
 .vscode/
+node_modules/
+hyperexecute.exe
+.hyperexecute.exe.old
+hyperexecute-code-*.zip

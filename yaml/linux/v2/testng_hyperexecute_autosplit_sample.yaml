@@ -18,6 +18,8 @@ framework:
   flags:
     - "-Dplatname=linux"
     - "--file=pom02.xml"
+  discoveryType: method
+  discoveryMode: remote
 
 retryOnFailure: true
 maxRetries: 1
