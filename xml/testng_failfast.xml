@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Global Policies :: failFast probe" thread-count="1" parallel="none">
+  <test name="ff_t_1">
+    <classes>
+      <class name="FailFastProbe">
+        <methods><include name="ff_test_1"/></methods>
+      </class>
+    </classes>
+  </test>
+  <test name="ff_t_2">
+    <classes>
+      <class name="FailFastProbe">
+        <methods><include name="ff_test_2"/></methods>
+      </class>
+    </classes>
+  </test>
+  <test name="ff_t_3">
+    <classes>
+      <class name="FailFastProbe">
+        <methods><include name="ff_test_3"/></methods>
+      </class>
+    </classes>
+  </test>
+  <test name="ff_t_4">
+    <classes>
+      <class name="FailFastProbe">
+        <methods><include name="ff_test_4"/></methods>
+      </class>
+    </classes>
+  </test>
+  <test name="ff_t_5">
+    <classes>
+      <class name="FailFastProbe">
+        <methods><include name="ff_test_5"/></methods>
+      </class>
+    </classes>
+  </test>
+  <test name="ff_t_6">
+    <classes>
+      <class name="FailFastProbe">
+        <methods><include name="ff_test_6"/></methods>
+      </class>
+    </classes>
+  </test>
+</suite>
